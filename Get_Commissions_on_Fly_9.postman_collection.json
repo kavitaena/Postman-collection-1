@@ -1,0 +1,1725 @@
+{
+	"info": {
+		"_postman_id": "d634e7c2-81d1-41df-ab2a-797a224713c6",
+		"name": "Get_Commissions_on_Fly_9",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Get Token Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataType Size",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"policyNumber is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for premiumDueDate\");\r",
+							"});\r",
+							"pm.test(\"premiumAmount is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for policyNumber\");\r",
+							"});\r",
+							"pm.test(\"premiumDueDate is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for subscriberCount\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for memberCount\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for transactionType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for productItemCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for agentCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for isInitialPayment\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for premiumAmount\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for fullCommissionablePremium\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"premiumDueDate\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"policyNumber\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"subscriberCount\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"memberCount\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"transactionType\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"productItemCode\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"agentCode\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"isInitialPayment\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"fullCommissionablePremium\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Mandatory validations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"policyNumber is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"premiumAmount is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"premiumAmount is mandatory\");\r",
+							"});\r",
+							"pm.test(\"premiumDueDate is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"premiumDueDate is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"\",\r\n    \"premiumDueDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid Premium amount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Invalid datatype for premiumAmount\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for premiumAmount\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"test\",\r\n    \"premiumDueDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid Premium amount TC01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Invalid datatype for premiumAmount\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for premiumAmount\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"1234567891234567.101\",\r\n    \"premiumDueDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid Premium amount TC02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Invalid datatype for premiumAmount\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for premiumAmount\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"1234555655653555555678.101\",\r\n    \"premiumDueDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid Premium Due Date as text",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Invalid datatype for premiumDueDate\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for premiumDueDate\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"test\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid Premium Due Date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"premiumDueDate is not a valid date format\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"premiumDueDate is not a valid date format\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"2024/12/12\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid Premium Due Date Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"premiumDueDate is not a valid date format\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"premiumDueDate is not a valid date format\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"1234\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid policy number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"policyNumber is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid subscriberCount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Invalid datatype for subscriberCount\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for subscriberCount\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"test\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid memberCount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Invalid datatype for memberCount\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for memberCount\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"12\",\r\n    \"memberCount\": \"test\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid transactionType",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"transactionType is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"transactionType is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"test\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid productItemCode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"productItemCode is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"productItemCode is Invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"test\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product item not associated to policy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"productitem not associated\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The provided productItemCode is not available on the Policy\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"General Liability PI\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid agentcode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"agentCode is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentCode is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"individual35124\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agentcode not associated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"agentCode not associated to policy\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The provided agent is not available on the Policy\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"individual351241\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid is initial payment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Invalid datatype for isInitialPayment\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for isInitialPayment\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"2\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid is initial payment Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Invalid datatype for isInitialPayment\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for isInitialPayment\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"2test\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid fullCommissionablePremium",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Invalid datatype for fullCommissionablePremium\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for fullCommissionablePremium\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid fullCommissionablePremium Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Invalid datatype for fullCommissionablePremium\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for fullCommissionablePremium\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"132456789123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid fullCommissionablePremium Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500.12\",\r\n    \"premiumDueDate\": \"06/09/2024\",\r\n    \"policyNumber\": \"customerAPI Policy08\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Valid TC01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"05/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy10\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Valid TC02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "Mounika",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"premiumAmount\": \"500\",\r\n    \"premiumDueDate\": \"05/01/2024\",\r\n    \"policyNumber\": \"customerAPI Policy10\",\r\n    \"subscriberCount\": \"\",\r\n    \"memberCount\": \"\",\r\n    \"transactionType\": \"\",\r\n    \"productItemCode\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"isInitialPayment\": \"1\",\r\n    \"fullCommissionablePremium\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionsOnFly?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionsOnFly"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

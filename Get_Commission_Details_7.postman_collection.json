@@ -1,0 +1,3765 @@
+{
+	"info": {
+		"_postman_id": "2c0788e5-9a4f-41aa-8ff5-332001e34645",
+		"name": "Get_Commission_Details_7",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Datatype size",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeType\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeSSNorTaxId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeExternalSystemType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for commissionType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for statementDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for policyNumber\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for agentCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for agentSSNorTaxId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for agentExternalSystemType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for agentExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for customerNumber\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"payeeCode\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"payeeSSNorTaxId\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"payeeExternalSystemType\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"payeeExternalSystemId\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"commissionType\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"statementDate\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"policyNumber\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"agentCode\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"agentSSNorTaxId\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"agentExternalSystemType\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"agentExternalSystemId\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"customerNumber\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validations when request is empty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Payee type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"payee type invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"test\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Payee type with numbers and special chars",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Payee type invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"123,./;'[]\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payee type with agent value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"payee type invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"Agent\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payee type with agency value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"payee type invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"agency\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payee type with agency value Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"payee type invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"agency\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payee type with individual value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Payee type invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"payeeType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"individual\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payee type with Firm value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Payee type invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"payeeType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"Firm\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payee type with Affiliate value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Payee type invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"Affiliate\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payee code is invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Payee code invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeCode is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"firm\",\r\n    \"payeeCode\": \"test\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payee code is invalid Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Payee code invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeCode is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"firm\",\r\n    \"payeeCode\": \"individual351240\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payee code is valid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Payee code invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"payeeCode is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"firm\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Only payee code is provided verify mandatory messages",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Provide SSN or Taxid and do not provide Payeetype",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"142-15-1249\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Provide invalid SSN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"SSN not present in System\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeSSNorTaxId is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"142-15-1263\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SSN as text",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"SSN not present in System\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeSSNorTaxId is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"test\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SSN without format",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"SSN not present in System\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeSSNorTaxId is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"142151249\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SSN with special characters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"SSN not present in System\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeSSNorTaxId is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \",./;'234\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Provide SSN and payee type as Firm",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Provided payeeSSNorTaxId is not matching with given payeeType\");\r",
+							"});\r",
+							"pm.test(\"SSN not present in System\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"payeeSSNorTaxId is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"FIRM\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"252-54-1585\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"08-31-2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Provide Taxid and payee type as Individual",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"StatementDate is missing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"statementDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"SSN not present in System\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"payeeSSNorTaxId is invalid\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Provided payeeSSNorTaxId is not matching with given payeeType\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"INDIVIDUAL\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"47-1843833\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Valid scenario by providing SSN and payee type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"INDIVIDUAL\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"252-54-1585\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"08-31-2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Provide Payee External System Type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"Producer Code\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Provide invalid Payee External System Type Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"payeeExternalSystemType is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeExternalSystemType is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ProducerCode\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Provide Payee ESID and do not provide External system type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"individual351240\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Provide invalid Payee ESID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Entity matching criteria\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"individual351240\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Provide Payee ESID Copy and External type not matching",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"Producer code\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payee ESID invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"payeeExternalSystemType is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"PayeeExternalSystemId is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"6252\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Valid Scenario for Payee External System Type and Payee ESID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006256\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"08-31-2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid commission Type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"commissionType is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"commissionType is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"test\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid commission Type Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"commissionType is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"commissionType is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"1233\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "valid commission Type but data not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"commissionType is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"commissionType is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Bonus\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Valid scenario by providing commission type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006256\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"08-31-2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid statement date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"invalid statement date\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is not a valid date format\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid statement date Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"invalid statement date\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is not a valid date format\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"1234\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid statement date Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"invalid statement date\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for statementDate\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"test\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid statement date Copy 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"invalid statement date\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for statementDate\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"30-01-2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid statement date Copy 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"invalid statement date\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDate is not a valid date format\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"2024/01/01\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Policy number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"invalid Policy number\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"CustomerAPI\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Valid policy but data not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"invalid Policy number\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"policyNumber is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"CustomerAPI01\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Valid scenario with Policy number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006256\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"08-31-2024\",\r\n    \"policyNumber\": \"CustomerAPI policy08\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Agent code",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"invalid agent code\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentCode is invalid\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"CustomerAPI policy08\",\r\n    \"agentCode\": \"test\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid agent ssn or Taxid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"invalid agent code\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentSSNorTaxId is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"CustomerAPI policy08\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"142-15-149\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid agent ssn or Taxid in masked",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"invalid agent code\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentSSNorTaxId is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"CustomerAPI policy08\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"XXX-XX-1249\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid agent ssn or Taxid Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"invalid agent code\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentSSNorTaxId is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"CustomerAPI policy08\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"1249\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid agent ssn or Taxid Copy 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"invalid agent code\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentSSNorTaxId is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeExternalSystemId\": \"0000006252\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"01/01/2024\",\r\n    \"policyNumber\": \"CustomerAPI policy08\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"!@#$%\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Multiple Payee Records with same Tax id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"invalid agent code\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"agentSSNorTaxId is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"Firm\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeSSNorTaxId\": \"99-9888815\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"Commission\",\r\n    \"statementDate\": \"03/01/2024\",\r\n    \"policyNumber\": \"CustomerAPI policy08\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid Agent External system type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"agentExternalSystemType is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentExternalSystemType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"08/02/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"test\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid Agent External system type Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"agentExternalSystemType is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentExternalSystemType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"08/02/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"test\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customernumber is invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"customerNumber is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"customerNumber is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeType\": \"\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"statementDate\": \"03/01/2024\",\r\n    \"policyNumber\": \"\",\r\n    \"agentCode\": \"\",\r\n    \"agentSSNorTaxId\": \"\",\r\n    \"agentExternalSystemType\": \"\",\r\n    \"agentExternalSystemId\": \"\",\r\n    \"customerNumber\": \",./\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Commission/commissionDetails?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Commission",
+						"commissionDetails"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

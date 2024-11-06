@@ -1,0 +1,2393 @@
+{
+	"info": {
+		"_postman_id": "826f7608-3a66-4ee0-8187-228aacd14e0a",
+		"name": "Get_Agent_on_policy_API_6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Token Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken1\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Data type size",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for agentCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for taxIdorSSN\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for externalSystemType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for externalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for policyNumber\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for hierarchyCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for carrier\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for policyEffectiveDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for customerNumber\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "kavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"agentCode\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"taxIdorSSN\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"externalSystemType\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"externalSystemId\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"policyNumber\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"hierarchyCode\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"carrier\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"policyEffectiveDate\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"customerNumber\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either agentCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "kavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"agentCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"hierarchyCode\": \"\",\r\n    \"carrier\": \"\",\r\n    \"policyEffectiveDate\": \"\",\r\n    \"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual321902\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_03",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentCode is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual32190\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "producerUserName",
+							"value": "KavitaCustomerAPI",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_04",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"firm627982\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_05",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"142-15-1249\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_06",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"error.invalidValues\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"taxIdorSSN is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"756-48-6997\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "producerUserName",
+							"value": "KavitaCustomerAPI",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_07",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"02-2345378\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "producerUserName",
+							"value": "KavitaCustomerAPI",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_08",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"error.mandatoryFields\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either agentCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"producer code\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "producerUserName",
+							"value": "KavitaCustomerAPI",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_09",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"error.mandatoryFields\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either agentCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"0000004785\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10&producerUserName=KavitaCustomerAPI",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "producerUserName",
+							"value": "KavitaCustomerAPI"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_010",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"error.mandatoryFields\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either agentCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"major\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_011",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual322048\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"major\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10&producerUserName=KavitaCustomerAPI",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "producerUserName",
+							"value": "KavitaCustomerAPI"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_012",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either agentCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"individual322048-004\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_013",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either agentCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"MPC\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_014",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either agentCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"12/13/2022\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10&producerUserName=KavitaCustomerAPI",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "producerUserName",
+							"value": "KavitaCustomerAPI"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_015",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either agentCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"sdfgdh\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10&producerUserName=KavitaCustomerAPI",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "producerUserName",
+							"value": "KavitaCustomerAPI"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_016",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual351240\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"s[littest policy 01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_017",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual321902\",\r\n\"taxIdorSSN\": \"789-38-5856\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_018",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual351240\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"Producer code\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_019",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"789-38-5856\",\r\n\"externalSystemType\": \"Producer Code\",\r\n\"externalSystemId\": \"individual321902\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_019 Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"Producer Code\",\r\n\"externalSystemId\": \"individual321902\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mdcsfccomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10&producerUserName=KavitaCustomerAPI",
+					"protocol": "https",
+					"host": [
+						"mdcsfccomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "producerUserName",
+							"value": "KavitaCustomerAPI"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UAT/MDC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true,
+					"host": true,
+					"content-length": true,
+					"content-type": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"Producer Code\",\r\n\"externalSystemId\": \"individual3001649\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mdcsfccomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"mdcsfccomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_019",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual321902\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"major\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_020",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual322048\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"individual322048-004\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=30",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_021",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual322048\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"MPC\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_022",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual322048\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"major 22\",\r\n\"hierarchyCode\": \"individual322048-003\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "producerUserName",
+							"value": "KavitaCustomerAPI",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_023",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual321902\",\r\n\"taxIdorSSN\": \"789-38-5856\",\r\n\"externalSystemType\": \"Producer code\",\r\n\"externalSystemId\": \"individual321902\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_024",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual321902\",\r\n\"taxIdorSSN\": \"789-38-5856\",\r\n\"externalSystemType\": \"Producer code\",\r\n\"externalSystemId\": \"individual321902\",\r\n\"policyNumber\": \"life health\",\r\n\"hierarchyCode\": \"individual321902-002\",\r\n\"carrier\": \"MPC\",\r\n\"policyEffectiveDate\": \"04/25/2023\",\r\n\"customerNumber\": \"cutomerk\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_025",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"taxIdorSSN\": \"11-4789562\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAgentOnPolicyAPIs_TC_026",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken1}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual324316\",\r\n\"taxIdorSSN\": \"\",\r\n\"externalSystemType\": \"\",\r\n\"externalSystemId\": \"\",\r\n\"policyNumber\": \"major\",\r\n\"hierarchyCode\": \"individual324316-002\",\r\n\"carrier\": \"\",\r\n\"policyEffectiveDate\": \"\",\r\n\"customerNumber\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Agent/agentPolicies?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Agent",
+						"agentPolicies"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.globals.set(\"accessToken\", \"4AvfhvFSkj63qz2MUp6ogsaQLDK5gr8YO51PAdFIdhH4Jtmc-7K_FlBy7GjI7m5xgSg7ocWkh_AMpJJn7_98GXhOm_fDXMbX4C0o4GR_KM6lb-wJyu7gwlzHIi8O3KQ8xTZyFKmTfJsXz3TVolWF4RTKJ1V1cRSt5jWXTJnqlRBtju_MSLTD6Wr4mwIsr8uGXOz3PS5HiCdxqY5hVt0UCuW1LyDcOwtfd791mCGhQfcVG-Ht4PJVP8yKVdgwRk7FJijLBLLqKpCYJAG_o7iGVlxGmBO-57XYRph3zBHFPYZ_Iz3gaD8efx4z87fQ8zRKvuG_LhHuf4P8E988yuFCSFz54KzbH2RJh5CFi9S7AsA\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

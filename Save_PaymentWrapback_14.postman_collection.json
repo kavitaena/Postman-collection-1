@@ -1,0 +1,945 @@
+{
+	"info": {
+		"_postman_id": "7176d968-bf15-435a-8a41-3afe08f5a7ba",
+		"name": "Save_PaymentWrapback_14",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Get Token Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataType Size",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"paymentNumber is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for paymentNumber\");\r",
+							"});\r",
+							"pm.test(\"paymentReferenceNumber is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for paymentReferenceNumber\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for paymentIssueDate\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"paymentReferenceNumber\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"paymentIssueDate\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mandatory validations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"paymentNumber is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"paymentReferenceNumber is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentReferenceNumber is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"\",\r\n    \"paymentReferenceNumber\": \"\",\r\n    \"paymentIssueDate\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mandatory validations Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"paymentNumber is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"paymentReferenceNumber is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentReferenceNumber is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"\",\r\n    \"paymentReferenceNumber\": \"\",\r\n    \"paymentIssueDate\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment reference number does not exists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"paymentReferenceNumber does not exist\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentReferenceNumber does not exist\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"test1\",\r\n    \"paymentReferenceNumber\": \"0000190\",\r\n    \"paymentIssueDate\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid payment issue date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"paymentIssueDate is not valid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for paymentIssueDate\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"test\",\r\n    \"paymentReferenceNumber\": \"0000001\",\r\n    \"paymentIssueDate\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid payment issue date Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"paymentIssueDate is not valid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for paymentIssueDate\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"test\",\r\n    \"paymentReferenceNumber\": \"0000001\",\r\n    \"paymentIssueDate\": \"31/12/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid payment issue date Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"paymentIssueDate is not valid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentIssueDate is not a valid date format\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"test\",\r\n    \"paymentReferenceNumber\": \"0000001\",\r\n    \"paymentIssueDate\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymentReferenceNumber is invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"paymentReferenceNumber is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for paymentReferenceNumber\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"test\",\r\n    \"paymentReferenceNumber\": \"test\",\r\n    \"paymentIssueDate\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymentReferenceNumber is invalid Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"paymentReferenceNumber is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for paymentReferenceNumber\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"test\",\r\n    \"paymentReferenceNumber\": \"PMT-0000001\",\r\n    \"paymentIssueDate\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymentReferenceNumber is invalid Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"paymentReferenceNumber is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for paymentReferenceNumber\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"test\",\r\n    \"paymentReferenceNumber\": \"!2#$%\",\r\n    \"paymentIssueDate\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymentIssueDate is greater than current date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"paymentIssueDate should be Less than or equal to Current Date\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentIssueDate should be Less than or equal to Current Date\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"Mounika <>?&,.:\",\r\n    \"paymentReferenceNumber\": \"0000004\",\r\n    \"paymentIssueDate\": \"12/21/2026\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "200 Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"Mounika <>?&,:\",\r\n    \"paymentReferenceNumber\": \"0000004\",\r\n    \"paymentIssueDate\": \"08/29/2024\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify update screnaio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"paymentNumber already exists in system for given record\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentNumber already exists in system for given record\");\r",
+							"});\r",
+							"pm.test(\"paymentIssueDate already exists in system for given record\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentIssueDate already exists in system for given record\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"Mounika <>?&,.:\",\r\n    \"paymentReferenceNumber\": \"0000004\",\r\n    \"paymentIssueDate\": \"08/01/2024\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment number already associated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Provided paymentNumber is already associated with another payee payment record\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Provided paymentNumber is already associated with another payee payment record\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "producerUserName",
+						"value": "Kavita Commission Details Customer Facing API",
+						"type": "text"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentNumber\": \"Mounika <>?&,.::\",\r\n    \"paymentReferenceNumber\": \"0000005\",\r\n    \"paymentIssueDate\": \"08/01/2024\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentWrapback",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentWrapback"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

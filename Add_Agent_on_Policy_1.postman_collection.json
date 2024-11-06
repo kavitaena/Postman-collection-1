@@ -1,0 +1,2387 @@
+{
+	"info": {
+		"_postman_id": "b548e6e3-08c8-4e2f-bdbb-2cb4ccb9e4c7",
+		"name": "Add_Agent_on_Policy_1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all fields empty_TC_01",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"carrierShortName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"hierarchyType is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"startDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"productItemName is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"pay is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either hierarchyCode or hierarchyExternalSystemId and startDate is required\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyType\": \"\",\r\n    \"startDate\": \"\",\r\n    \"endDate\": \"\",\r\n    \"policyNumber\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"productItemName\": \"dfh@445...\",\r\n    \"pay\": \"dhdfh223@\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "datatype_TC_01",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for startDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for endDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for carrierShortName\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for pay\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hierarchyCode\": \"safsggr@345678\",\r\n    \"hierarchyExternalSystemId\": \"QWERTTgfhjuyh!@#$3456789\",\r\n    \"hierarchyType\": \"QWSDCRTGG!@#$234567\",\r\n    \"startDate\": \"WEDFYTHGFD!@#$2345678\",\r\n    \"endDate\": \"WEDFYTHGFD!@#$2345678ddd\",\r\n    \"policyNumber\": \"WEDFYTHGFD!@#$2345678\",\r\n    \"carrierShortName\": \"WEDFYTHGFD!@#$2345678\",\r\n    \"productItemName\": \"WEDFYTHGFD!@#$2345678\",\r\n    \"pay\": \"!@#qwer123456856853685258525\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "datatype size_TC_02",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for startDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for endDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for carrierShortName\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for pay\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for policyNumber\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for hierarchyType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for hierarchyExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for hierarchyCode\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hierarchyCode\": \"safsggr@345678fhgfjgh@#$5678vgjyhkukuk@#4567dfhfjgkukhsdfgh2345.......\",\r\n    \"hierarchyExternalSystemId\": \"safsggr@345678fhgfjgh@#$5678vgjyhkukuk@#4567dfhfjgkukhsdfgh2345.......\",\r\n    \"hierarchyType\": \"safsggr@345678fhgfjgh@#$5678vgjyhkukuk@#4567dfhfjgkukhsdfgh2345.......safsggr@345678fhgfjgh@#$5678vgjyhkukuk@#4567dfhfjgkukhsdfgh2345.......\",\r\n    \"startDate\": \"WEDFYTHGFD!@#$2345678\",\r\n    \"endDate\": \"WEDFYTHGFD!@#$2345678ddd\",\r\n    \"policyNumber\": \"WEDFYTHGsafsggr@345678fhgfjgh@#$5678vgjyhkukuk@#4567dfhfjgkukhsdfgh2345.FD!@#$2345678\",\r\n    \"carrierShortName\": \"WEDFYTHGFD!@#$2345678\",\r\n    \"productItemName\": \"WEDFYTHGFD!@#$2345678\",\r\n    \"pay\": \"!@#qwWEDFYTHGFD!@#$2345678er1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add agent on policy200_TC_02",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\",\r\n\"startDate\": \"01-01-2021\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"CustomerAPI policy08\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"yes\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add agent on productItem200_TC_03",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-004\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\",\r\n\"startDate\": \"02-01-2021\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"CustomerAPI policy09\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"SFprdit\",\r\n\"pay\": \"yes\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add agent on policy422_TC_04",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent exists with in the same duration with the same arrangement.\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\",\r\n\"startDate\": \"01-01-2021\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"CustomerAPI policy08\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Policy not exist_TC_05",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351242-007\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\",\r\n\"startDate\": \"05-24-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"Major_0000000000001000000\",\r\n\"carrierShortName\": \"mpc\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hierarchy code not exist_TC_06",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"hierarchyCode is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual359000-001\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\",\r\n\"startDate\": \"05-24-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"Major_001\",\r\n\"carrierShortName\": \"mpc\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "one/multiple main agent on policy 422_TC_07",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"New agent cannot be added as more than one primary Agent exists within the same duration.\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-004\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"commissionable hierarchy\",\r\n\"startDate\": \"06-12-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"CustomerAPI policy08\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hierarchyTypeReferral_TC_08",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"referral Hierarchy\",\r\n\"startDate\": \"01-01-2021\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"CustomerAPI policy07\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hierarchyTypedifffor arr&agentonpolicy_TC_09",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Provided hierarchyType is not matching with agent hierarchy Type\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-013\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"referral Hierarchy\",\r\n\"startDate\": \"01-01-2021\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"CustomerAPI policy03\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hierarchyESID not associated_TC_010",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Hierarchy not found with provided hierarchyExternalSystemId\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"\",\r\n\"hierarchyExternalSystemId\": \"0000004518\",\r\n\"hierarchyType\": \"referral Hierarchy\",\r\n\"startDate\": \"06-13-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"CustomerAPI policy03\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hierarchyESID associated_TC_011",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"\",\r\n\"hierarchyExternalSystemId\": \"0000006253\",\r\n\"hierarchyType\": \"referral Hierarchy\",\r\n\"startDate\": \"05-24-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"CustomerAPI policy04\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HC/HESDI validation_TC_012",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either hierarchyCode or hierarchyExternalSystemId and startDate is required\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"referral Hierarchy\",\r\n\"startDate\": \"05-24-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"major_006\",\r\n\"carrierShortName\": \"mpc\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid hierarchyCode_TC_013",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"hierarchyCode is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"indvdl456354\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"referral Hierarchy\",\r\n\"startDate\": \"05-24-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"major_006\",\r\n\"carrierShortName\": \"mpc\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid hierarchyESID_TC_014",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"hierarchyExternalSystemId is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"\",\r\n\"hierarchyExternalSystemId\": \"00.256\",\r\n\"hierarchyType\": \"referral Hierarchy\",\r\n\"startDate\": \"05-24-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"major_006\",\r\n\"carrierShortName\": \"mpc\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "endDate <startDate_TC_015",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"endDate should be greater than or equal to startDate\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable hierarchy\",\r\n\"startDate\": \"05-28-2024\",\r\n\"endDate\": \"05-27-2020\",\r\n\"policyNumber\": \"CustomerAPI policy03\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "startDateMandatory_TC_016",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"startDate is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable hierarchy\",\r\n\"startDate\": \"\",\r\n\"endDate\": \"05-27-2024\",\r\n\"policyNumber\": \"major_010\",\r\n\"carrierShortName\": \"mpc\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "startDateInvalid_TC_017",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for startDate\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable hierarchy\",\r\n\"startDate\": \"2024-28-05\",\r\n\"endDate\": \"05-27-2024\",\r\n\"policyNumber\": \"CustomerAPI policy03\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "endDateInvalid_TC_018",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"endDate is not a valid date format\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351087-009\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable hierarchy\",\r\n\"startDate\": \"05-28-2024\",\r\n\"endDate\": \"5-27-24\",\r\n\"policyNumber\": \"major_010\",\r\n\"carrierShortName\": \"mpc\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "policyNumber mandatory_TC_019",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable hierarchy\",\r\n\"startDate\": \"05-28-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "policyNumber invalid_TC_020",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable hierarchy\",\r\n\"startDate\": \"05-28-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"@dsfdd\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "carrierShortNamemandatory_TC_021",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"carrierShortName is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable hierarchy\",\r\n\"startDate\": \"06-12-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"major_011\",\r\n\"carrierShortName\": \"\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "carrierShortNameInvalid_TC_022",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"carrierShortName is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable hierarchy\",\r\n\"startDate\": \"05-28-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"major_009\",\r\n\"carrierShortName\": \"MOP\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "productItemName Invalid_TC_023",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"productItemName is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351087-009\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable hierarchy\",\r\n\"startDate\": \"05-28-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"major_009\",\r\n\"carrierShortName\": \"mpc\",\r\n\"productItemName\": \"ghgjhj\",\r\n\"pay\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay Invalid_TC_024",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"pay is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable hierarchy\",\r\n\"startDate\": \"06-12-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"major_012\",\r\n\"carrierShortName\": \"mpc\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"fgtyh\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pastdate than arr_TC_025",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Policy/Enrollment can't be transferred as New Agent's duration doesn't fall into the duration of the New Arrangement.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable hierarchy\",\r\n\"startDate\": \"12/01/1999\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"CustomerAPI policy03\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"yes\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "futuredate than arr200_TC_026",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable hierarchy\",\r\n\"startDate\": \"01-01-2026\",\r\n\"endDate\": \"08-25-2026\",\r\n\"policyNumber\": \"CustomerAPI policy05\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"yes\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "doesn't fall into the duration_TC_028",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Policy/Enrollment can't be transferred as New Agent's duration doesn't fall into the duration of the New Arrangement.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\",\r\n\"startDate\": \"01/01/2020\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"CustomerAPI policy07\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"SFprdit\",\r\n\"pay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "diff policy&carrier_TC_029",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No Policy found with provide policyNumber and carrierShortName\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\",\r\n\"startDate\": \"06-12-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"CustomerAPI policy03\",\r\n\"carrierShortName\": \"MPC\",\r\n\"productItemName\": \"VSFC PI\",\r\n\"pay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add on prodItem with ESID200_TC_030",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"\",\r\n\"hierarchyExternalSystemId\": \"0000006377\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\",\r\n\"startDate\": \"01-01-2021\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"CustomerAPI policy06\",\r\n\"carrierShortName\": \"AIC\",\r\n\"productItemName\": \"SFprdit\",\r\n\"pay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agent is not eligible_TC_031",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent is not eligible.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual326283-001\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\",\r\n\"startDate\": \"05-29-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"major_017\",\r\n\"carrierShortName\": \"mpc\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hierarchy not found_TC_032",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Hierarchy not found with provided hierarchyExternalSystemId\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"\",\r\n\"hierarchyExternalSystemId\": \"0000006214\",\r\n\"hierarchyType\": \"referral Hierarchy\",\r\n\"startDate\": \"05-30-2024\",\r\n\"endDate\": \"\",\r\n\"policyNumber\": \"major_026\",\r\n\"carrierShortName\": \"mpc\",\r\n\"productItemName\": \"\",\r\n\"pay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "specific criteria Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Arrangement criteria is not matching with the Policy/Enrollment criteria\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"hierarchyCode\": \"individual351240-002\",\r\n\"hierarchyExternalSystemId\": \"\",\r\n\"hierarchyType\": \"referral hierarchy\",\r\n\"startDate\": \"06/04/2024\",\r\n\"endDate\": \"06-30-2024\",\r\n\"policyNumber\": \"major_1002\",\r\n\"carrierShortName\": \"mpc\",\r\n\"productItemName\": \"General Liability PI\",\r\n\"pay\": \"yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

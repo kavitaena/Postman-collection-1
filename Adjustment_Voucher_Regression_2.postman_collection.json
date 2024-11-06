@@ -1,0 +1,1636 @@
+{
+	"info": {
+		"_postman_id": "f3ad20c1-4b9a-427d-b806-e21409001c5e",
+		"name": "Adjustment_Voucher_Regression_2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Get Token Copy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dataType validation_TC01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"adjustmentCategory is invalid\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"externalSystemType is invalid\");\r",
+							"});\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyOrEnrollmentNumber is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"voucherCode is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"voucherCode is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"entityType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"QWDFG!@#123456\",\r\n    \"entityCode\": \"QWDFG!@#123456\",\r\n    \"taxIdorSSN\": \"wertyufdcv\",\r\n    \"externalSystemType\": \"QWDFG!@#123456fhfh\",\r\n    \"externalSystemId\": \"QWDFG!@#123456\",\r\n    \"policyOrEnrollmentNumber\": \"QWDFG!@#123456fdgd@5\",\r\n    \"adjustmentCategory\": \"QWDFG!@#123456@#$fh_53\",\r\n    \"voucherCode\": \"QWDFG!@#1234fs!@#$erty56535dsf@\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dataType size_TC01 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for entityType\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for entityCode\");\r",
+							"});\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for taxIdorSSN\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for externalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for policyOrEnrollmentNumber\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for adjustmentCategory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for voucherCode\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"wertyusxcbQWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53!@#$5345678pageQWDFG!@#123456\",\r\n    \"entityCode\": \"QWDFG!@#12345wertyusxcb!@#$5345678pageQWDFG!@#1234566\",\r\n    \"taxIdorSSN\": \"wertyufdcwertyusxcb!@#$5345678pageQWDFG!@#123456v\",\r\n    \"externalSystemType\": \"QWDFG!wertyusxcb!@#$5345678pageQWDFG!@#123456@#123456fhfh\",\r\n    \"externalSystemId\": \"QWDFG!@wertyusxcb!@#$5345678pageQWDFG!@#123456#123456\",\r\n    \"policyOrEnrollmentNumber\": \"QWwertyusxcb!@#$5345678pageQWDFG!@#123456DFG!@#123456fdgd@5\",\r\n    \"adjustmentCategory\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fhQWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53_53\",\r\n    \"voucherCode\": \"QWDFG!@#1234fs!wertyusxcb!@#$5345678pageQWDFG!@#123456@#$erty56535dsf@\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"entityType is mandatory\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"entityType is invalid\");\r",
+							"}); \r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"test\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC03",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC04",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"entityCode is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"test\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC05",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"taxIdorSSN is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"test\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC06",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"taxIdorSSN is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"123-45-5236\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC07",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"externalSystemType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"test\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC08",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"entityidno\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC09",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"externalSystemId is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or taxIdorSSN or (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"234234\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"entityidno\",\r\n    \"externalSystemId\": \"test\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC11",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"individual331737\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC12",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"47-1843833\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC13",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyOrEnrollmentNumber is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"entityidno\",\r\n    \"externalSystemId\": \"test\",\r\n    \"policyOrEnrollmentNumber\": \",./\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"entityidno\",\r\n    \"externalSystemId\": \"test\",\r\n    \"policyOrEnrollmentNumber\": \"test\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC15",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"entityidno\",\r\n    \"externalSystemId\": \"test\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"General Adjustment\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC16",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"adjustmentCategory is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"entityidno\",\r\n    \"externalSystemId\": \"test\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"test\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC17",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"voucherCode is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"entityidno\",\r\n    \"externalSystemId\": \"test\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC18",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"\",\r\n    \"taxIdorSSN\": \"999-88-8823\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjustment Voucher_TC19",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Agent\",\r\n    \"entityCode\": \"individual324685\",\r\n    \"taxIdorSSN\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"policyOrEnrollmentNumber\": \"\",\r\n    \"adjustmentCategory\": \"\",\r\n    \"voucherCode\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/adjustmentVouchers?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"adjustmentVouchers"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

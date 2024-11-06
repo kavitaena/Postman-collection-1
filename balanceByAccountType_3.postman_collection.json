@@ -1,0 +1,2075 @@
+{
+	"info": {
+		"_postman_id": "8736d226-96ae-4151-9f68-066c1b0240c9",
+		"name": "balanceByAccountType_3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Get Token Copy 2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataType validation_TC_01 Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for accountType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for externalSystemType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for externalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeSSNorTaxId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for carrierShortName\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for contractExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for contractCode\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"externalSystemType\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"externalSystemId\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"payeeCode\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"payeeType\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"payeeSSNorTaxId\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"carrierShortName\":\".QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53...\",\r\n\"contractExternalSystemId\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"contractCode\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_01 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"carrierShortName is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"contractCode is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"externalSystemId is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"contractExternalSystemId is Invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeSSNorTaxId is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"ttu\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"fgfgf\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"ff\",\r\n\"carrierShortName\":\"....\",\r\n\"contractExternalSystemId\":\"fh\",\r\n\"contractCode\":\"xf\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"error.mandatoryFields\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"error.mandatoryFields\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"1099 Balance\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_03",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"entityidno\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_04",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"error.mandatoryFields\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"0000005638\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_05",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"0.00\");\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"entityidno\",\r\n\"externalSystemId\":\"0000005638\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_06",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"error.invalidValues\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeCode is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"firm627982\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_07",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"PC-firm627982\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"PC-firm627982\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_08",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"error.mandatoryFields\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"Agent\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_08 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"error.mandatoryFields\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"Affiliate\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_09",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"error.mandatoryFields\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"99-9888815\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_010",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Multiple records found with provided payeeType and payeeSSNorTaxId, please provide additional identifiers like payeeCode OR (externalSystemType and externalSystemId)\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"firm\",\r\n\"payeeSSNorTaxId\":\"99-9888815\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_011",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"PC-firm627982\",\r\n\"payeeType\":\"firm\",\r\n\"payeeSSNorTaxId\":\"99-9888815\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_012",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"PC-firm628779\",\r\n\"payeeType\":\"firm\",\r\n\"payeeSSNorTaxId\":\"99-9888815\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_013",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"MPC\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_014",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"PC-firm628779\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"ALL\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_015",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"0000005762\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_016",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"PC-individual303924\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"0000005762\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_017",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQzNDcxMzMyRjBDRTVERjM2MDlFMEVDOUMxN0FDODFGNTdERTEyNUUiLCJ4NXQiOiIwMGNUTXZET1hmTmduZzdKd1hySUgxZmVFbDQiLCJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiJWVUVBZG1pbiIsIm5ldHdvcmtJZCI6ImVhZTAxNDhkLTYzZGQtNGYwYy1iMWQ2LTE1N2Q0NmU4MzY3MCIsInN1YiI6IlZVRUFkbWluIiwibmJmIjoxNzA4Njg2NjY0LCJleHAiOjE3MDg2ODg0NjQsImlhdCI6MTcwODY4NjY2NCwiaXNzIjoiVnVlIiwiYXVkIjoiU2lyY29uIn0.UF1uPtnSKFI48Rvsq5iDPkan1A7wo7OowXMqmpjBsfpPsmZyZWcouJ3zAZqOXoKxqNVn4LJ9UD-97HHNPF451blJnggxiAndj_QzX0OKkwdGOEm9e4OwTAGlViwEodrgfvqfBuA2uhn66ao_FiPpNJUIsTufX5dDR7UBb4HrkGwTdNzKEEVAUqiCpT_x-u2aGPu8-jFG7f750FZe-ka3FUrtR_Lj248276X_xjwc4h6dk5k8Jkj-FbNXrqFcCWlBfUpyD_tzUX9LvKz4pLrpZwaBA_efrn-JFxArold8z7Iprt8XuolsARJEjl9Dai4EF-CgwRJzh_jteuyX5DmJTw",
+						"disabled": true
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"C-93823644\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_018",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"DEB B JULYREGTHREE\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"PC-individual303924\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"PC-individual303924\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"C-09999986\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_TC_019",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Provided payeeSSNorTaxId is not matching with given payeeType\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"firm\",\r\n\"payeeSSNorTaxId\":\"203-50-3603\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"C-09999986\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balancesByAccountType_200_TC_020",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"PC-AF01228\",\r\n\"payeeType\":\"\",\r\n\"payeeSSNorTaxId\":\"\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SSN of affiliate_200_TC_021",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"accountType\":\"\",\r\n\"externalSystemType\":\"\",\r\n\"externalSystemId\":\"\",\r\n\"payeeCode\":\"\",\r\n\"payeeType\":\"Individual\",\r\n\"payeeSSNorTaxId\":\"203-50-3603\",\r\n\"carrierShortName\":\"\",\r\n\"contractExternalSystemId\":\"\",\r\n\"contractCode\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/balancesByAccountType?pageIndex=1&pageSize=100",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"balancesByAccountType"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

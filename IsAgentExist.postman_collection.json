@@ -1,0 +1,1422 @@
+{
+	"info": {
+		"_postman_id": "a47c97e5-0c89-4f3a-aa25-8db8360c506d",
+		"name": "IsAgentExist",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "getauthtokens Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.Token)\r",
+							"pm.globals.set(\"VUEAUTH\", jsonData.Token);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "VlVFQ29tcGVuc2F0aW9uQWRtaW4=",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://sircontestgatewayapp.sircon.com/VUE.Gateway.Internal/api/GatewayInternal/GetAuthToken",
+					"protocol": "http",
+					"host": [
+						"sircontestgatewayapp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUE.Gateway.Internal",
+						"api",
+						"GatewayInternal",
+						"GetAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Distribution key empty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Distribution Key cannot be empty\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"\",\r\n    \"producerType\": \"\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producerType empty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerType is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either producerId or producerName or npn is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producerType invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for producerType\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"sfghgjghk#$*&$*&............546878686fgtfhthngjyjyjsdgfdg\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producerType invalid affiliate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerType is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"agency\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"b\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producerId invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for producerId\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"individual\",\r\n    \"producerId\": \"xcfdgvbhjn56445865sxdfcgvbhjnkm845145875623145862315sedrtfyghujmk,\",\r\n    \"producerName\": \"\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producerId valid Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"individual\",\r\n    \"producerId\": \"888888\",\r\n    \"producerName\": \"\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producerId Name invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent/Agency not found with the provided input\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"individual\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"dffhgdffhgjgjh dfhghgjgjh dffhgjgjh dfhghgjj ddddCo ddddCounter shows you the top 10 kehgjhgjgkhkkkydfhfgngnjyuyuyuughgghf5215858#456fgfhh@#%^&*()WDCVBHUIOLEDFCVUJHTGAZXCVBNSDFGHJKRTYUIO\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producerName multiple records found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Multiple records found with provided input\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"individual\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"customer\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producerName single record_200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"individual\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"Automation DND Customer API two\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "npn _200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"individual\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"\",\r\n    \"npn\": \"524698736\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invaliddatatype for npn",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for npn\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"individual\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"\",\r\n    \"npn\": \"524Egfhgjjyhkjkull566858...@#$$%^^698736\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "different producerType and producerName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent/Agency not found with the provided input\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"firm\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"Automation DND Customer API two\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "different producerType and producerId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerId is Invalid\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"individual\",\r\n    \"producerId\": \"626205\",\r\n    \"producerName\": \"\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "different producerType and npn",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent/Agency not found with the provided input\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"firm\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"\",\r\n    \"npn\": \"524698736\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "different producerType and npn Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent/Agency not found with the provided input\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"firm\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"\",\r\n    \"npn\": \"524698736\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "agent not exist in Comp with name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent/Agency not found with the provided input\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"firm\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"kavita Agency newe\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "agent not exist in Comp with ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerId is Invalid\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"firm\",\r\n    \"producerId\": \"632135\",\r\n    \"producerName\": \"\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "agent not exist in PC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent/Agency not found with the provided input\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"firm\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"agent not exist in pc\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producerType is mandatory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerType is mandatory\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"kavita kavita k Ms\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "distribution key empty and provided other criteria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Distribution Key cannot be empty\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"\",\r\n    \"producerType\": \"individual\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"kavita kavita k Ms\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producer type mandatory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerType is mandatory\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"\",\r\n    \"producerId\": \"\",\r\n    \"producerName\": \"kavita kavita k Ms\",\r\n    \"npn\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/IsAgentExists",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"IsAgentExists"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

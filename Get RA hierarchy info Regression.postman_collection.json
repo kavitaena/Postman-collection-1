@@ -1,0 +1,761 @@
+{
+	"info": {
+		"_postman_id": "ec5d6117-a487-42ed-bf2f-506dba25eca0",
+		"name": "Get RA hierarchy info Regression",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "getauthtoken Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.Token)\r",
+							"pm.globals.set(\"VUEAUTH\", jsonData.Token);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTHKey",
+						"value": "VlVFQ29tcGVuc2F0aW9uQWRtaW4=",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://sircontestgatewayapp.sircon.com/VUE.Gateway.Internal/api/GatewayInternal/GetAuthToken",
+					"protocol": "http",
+					"host": [
+						"sircontestgatewayapp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUE.Gateway.Internal",
+						"api",
+						"GatewayInternal",
+						"GetAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Distribution Key empty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Distribution Key cannot be empty\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Distribution Key cannot be empty\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DistributionKey\": \"\",\r\n    \"producerType\": \"individual\",\r\n    \"producerId\": \"303924\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/GetRAHierarchyInfo?VUEAPI-AUTH={{accessToken}}&VUEAPI-SourceApplication=VUE",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"GetRAHierarchyInfo"
+					],
+					"query": [
+						{
+							"key": "VUEAPI-AUTH",
+							"value": "{{accessToken}}"
+						},
+						{
+							"key": "VUEAPI-SourceApplication",
+							"value": "VUE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producer type is Empty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"producerType is mandatoryy\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerType is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DistributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"\",\r\n    \"producerId\": \"303924\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/GetRAHierarchyInfo?VUEAPI-AUTH={{accessToken}}&VUEAPI-SourceApplication=VUE",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"GetRAHierarchyInfo"
+					],
+					"query": [
+						{
+							"key": "VUEAPI-AUTH",
+							"value": "{{accessToken}}"
+						},
+						{
+							"key": "VUEAPI-SourceApplication",
+							"value": "VUE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producer ID is empty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"producerId is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerId is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DistributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"Individual\",\r\n    \"producerId\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/GetRAHierarchyInfo?VUEAPI-AUTH={{VUEAUTH}}&VUEAPI-SourceApplication=VUE",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"GetRAHierarchyInfo"
+					],
+					"query": [
+						{
+							"key": "VUEAPI-AUTH",
+							"value": "{{VUEAUTH}}"
+						},
+						{
+							"key": "VUEAPI-SourceApplication",
+							"value": "VUE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Distribution code is invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Implementation details not found for given Distribution Key\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Implementation details not found for given Distribution Key\");\r",
+							"});\r",
+							"pm.test(\"Status code is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DistributionKey\": \"eae0148d-63dd-4f0c-b1d6-\",\r\n    \"producerType\": \"Individual\",\r\n    \"producerId\": \"303924\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/GetRAHierarchyInfo?VUEAPI-AUTH={{VUEAUTH}}&VUEAPI-SourceApplication=VUE",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"GetRAHierarchyInfo"
+					],
+					"query": [
+						{
+							"key": "VUEAPI-AUTH",
+							"value": "{{VUEAUTH}}"
+						},
+						{
+							"key": "VUEAPI-SourceApplication",
+							"value": "VUE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Distribution code with more characters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Implementation details not found for given Distribution Key\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Implementation details not found for given Distribution Key\");\r",
+							"});\r",
+							"pm.test(\"Status code is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DistributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"Individual\",\r\n    \"producerId\": \"303924\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/GetRAHierarchyInfo?VUEAPI-AUTH={{VUEAUTH}}&VUEAPI-SourceApplication=VUE",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"GetRAHierarchyInfo"
+					],
+					"query": [
+						{
+							"key": "VUEAPI-AUTH",
+							"value": "{{VUEAUTH}}"
+						},
+						{
+							"key": "VUEAPI-SourceApplication",
+							"value": "VUE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producer Type invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"producerType is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DistributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"Individualtest\",\r\n    \"producerId\": \"303924\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/GetRAHierarchyInfo?VUEAPI-AUTH={{VUEAUTH}}&VUEAPI-SourceApplication=VUE",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"GetRAHierarchyInfo"
+					],
+					"query": [
+						{
+							"key": "VUEAPI-AUTH",
+							"value": "{{VUEAUTH}}"
+						},
+						{
+							"key": "VUEAPI-SourceApplication",
+							"value": "VUE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producer Type invalid length",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"producerType is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DistributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"testtestestestestestestestsetestsetestsetsetestestestsetsetsetsetettesttestestestestestestestsetestsetestsetsetestestestsetsetsetsetettesttestestestestestestestsetestsetestsetsetestestestsetsetsetsetettesttestestestestestestestsetestsetestsetsetestestestsetsetsetsetettesttestestestestestestestsetestsetestsetsetestestestsetsetsetsetettesttestestestestestestestsetestsetestsetsetestestestsetsetsetsetettesttestestestestestestestsetestsetestsetsetestes\",\r\n    \"producerId\": \"303924\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/GetRAHierarchyInfo?VUEAPI-AUTH={{VUEAUTH}}&VUEAPI-SourceApplication=VUE",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"GetRAHierarchyInfo"
+					],
+					"query": [
+						{
+							"key": "VUEAPI-AUTH",
+							"value": "{{VUEAUTH}}"
+						},
+						{
+							"key": "VUEAPI-SourceApplication",
+							"value": "VUE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producer ID Type invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"producerId is Invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerId is Invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DistributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"Individual\",\r\n    \"producerId\": \"3039\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/GetRAHierarchyInfo?VUEAPI-AUTH={{VUEAUTH}}&VUEAPI-SourceApplication=VUE",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"GetRAHierarchyInfo"
+					],
+					"query": [
+						{
+							"key": "VUEAPI-AUTH",
+							"value": "{{VUEAUTH}}"
+						},
+						{
+							"key": "VUEAPI-SourceApplication",
+							"value": "VUE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producer ID Type invalid Length",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"producerId is Invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerId is Invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DistributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"Individual\",\r\n    \"producerId\": \"303924234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/GetRAHierarchyInfo?VUEAPI-AUTH={{VUEAUTH}}&VUEAPI-SourceApplication=VUE",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"GetRAHierarchyInfo"
+					],
+					"query": [
+						{
+							"key": "VUEAPI-AUTH",
+							"value": "{{VUEAUTH}}"
+						},
+						{
+							"key": "VUEAPI-SourceApplication",
+							"value": "VUE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Valid Test case",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"producerId is Invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"producerId is Invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "VUEAPI-AUTH",
+						"value": "{{VUEAUTH}}",
+						"type": "text"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DistributionKey\": \"eae0148d-63dd-4f0c-b1d6-157d46e83670\",\r\n    \"producerType\": \"Individual\",\r\n    \"producerId\": \"324983\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/VUEGateway/api/Gateway/GetRAHierarchyInfo?VUEAPI-AUTH={{VUEAUTH}}&VUEAPI-SourceApplication=VUE",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"VUEGateway",
+						"api",
+						"Gateway",
+						"GetRAHierarchyInfo"
+					],
+					"query": [
+						{
+							"key": "VUEAPI-AUTH",
+							"value": "{{VUEAUTH}}"
+						},
+						{
+							"key": "VUEAPI-SourceApplication",
+							"value": "VUE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

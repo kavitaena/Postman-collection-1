@@ -1,0 +1,2715 @@
+{
+	"info": {
+		"_postman_id": "9d737786-63f2-4c5d-9029-885f806ea805",
+		"name": "Payment_PreferenceA_12",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Get Token Copy 6",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataType Size",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeSSNorTaxId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for externalSystemType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for externalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for fromDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for applicableFor\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for contractCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for contractExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for carrierShortName\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for returnUnmaskedData\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"payeeType\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"payeeSSNorTaxId\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"externalSystemType\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"externalSystemId\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"fromDate\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"applicableFor\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"contractCode\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"contractExternalSystemId\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"carrierShortName\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"returnUnmaskedData\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC01 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"fromDate is not a valid date format\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"carrierShortName is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"externalSystemType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"applicableFor is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"returnUnmaskedData is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"contractCode is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"contractExternalSystemId is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"sdg\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"sd\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"10-06-24\",\r\n    \"applicableFor\": \"dfgf\",\r\n    \"contractCode\": \"gfgg\",\r\n    \"contractExternalSystemId\": \"dghd\",\r\n    \"carrierShortName\": \"dd\",\r\n    \"returnUnmaskedData\": \"sdg\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeCode is invalid\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351001\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC03",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"Agent\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC04",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"99-9888815\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC05",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"99-9888815\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC06",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Multiple records found with provided payeeType and payeeSSNorTaxId, please provide additional identifiers like payeeCode OR (externalSystemType and externalSystemId)\");\r",
+							"});\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"firm\",\r\n    \"payeeSSNorTaxId\": \"99-9888815\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC07",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"Individual\",\r\n    \"payeeSSNorTaxId\": \"152-98-7698\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC08",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode OR (payeeType and payeeSSNorTaxId) OR (externalSystemType and externalSystemId) is mandatory\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"Producer Code\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC09",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"externalSystemId is invalid\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"Producer Code\",\r\n    \"externalSystemId\": \"firm62876\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"externalSystemType is invalid\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"Producer\",\r\n    \"externalSystemId\": \"firm628762\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC11",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeSSNorTaxId is invalid\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"test\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC12",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"Affiliate\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC13",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"fromDate is not a valid date format\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"2024\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for fromDate\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"2024/26/02\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC15",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"applicableFor is invalid\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"Test\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC16",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"test\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC17",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"contractExternalSystemId is invalid\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"test\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC18",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC19",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC20",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Balance\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Direct Deposit (EFT)\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Active\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bi-weekly\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Paper\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"SBI\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"XXXXXX1237\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"XXXXX0000\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Savings\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Manage BRO\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"12.35\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"C-93822416\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"123.00\");\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC21",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Balance\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Direct Deposit (EFT)\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"99-9888815\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Active\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bi-weekly\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Paper\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"SBI\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"1231231237\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"100000000\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Savings\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Manage BRO\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"12.35\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"C-93822416\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"123.00\");\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"True\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Balance\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Direct Deposit (EFT)\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Active\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bi-weekly\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Paper\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"SBI\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"XXXXXX1237\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"XXXXX0000\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Savings\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Manage BRO\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"12.35\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"C-93822416\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"123.00\");\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"false\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC23",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Balance\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Direct Deposit (EFT)\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Active\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Bi-weekly\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Paper\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"SBI\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"XXXXXX1237\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"XXXXX0000\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Savings\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Manage BRO\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"12.35\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"C-93822416\");\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"123.00\");\r",
+							"    pm.test(\"Body matches string\", function () {\r",
+							"        pm.expect(pm.response.text()).to.include(\"0000005966\");\r",
+							"    });\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"Agent Balance\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"false\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC24",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"0000005966\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"entityidno\",\r\n    \"externalSystemId\": \"0000005966\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"false\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment Preference_TC25",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"C-93822416\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm628762\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"C-93822416\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"false\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payeeType affiliate validation_TC26",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-AF01228\",\r\n    \"payeeType\": \"affiliate\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"false\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payeetype is ssn is different  _TC27",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Provided payeeSSNorTaxId is not matching with given payeeType\");\r",
+							"});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"firm\",\r\n    \"payeeSSNorTaxId\": \"203-50-3603\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"false\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payeeType affiliate validation_TC28",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"Individual\",\r\n    \"payeeSSNorTaxId\": \"203-50-3603\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"true\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payeeType affiliate validation_TC28 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-AF01228\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"false\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "testing purpose",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "VUEAPI-SourceApplication",
+						"value": "VUE"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual322925\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"externalSystemType\": \"\",\r\n    \"externalSystemId\": \"\",\r\n    \"fromDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"contractExternalSystemId\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"returnUnmaskedData\": \"\"\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/paymentPreferences?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"paymentPreferences"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

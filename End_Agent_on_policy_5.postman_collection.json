@@ -1,0 +1,2381 @@
+{
+	"info": {
+		"_postman_id": "2d9ef179-b2e4-4814-a657-6f59c7f45411",
+		"name": "End_Agent_on_policy_5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Data types sizes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"All datatype validation\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for policyNumber\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for carrierShortName\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for hierarchyCode\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for hierarchyExternalSystemId\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for startDate\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for hierarchyType\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for chargeBack\");\r",
+							"     pm.expect(pm.response.text()).to.include(\"Invalid datatype for endDate\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"carrierShortName\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"productItemName\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"hierarchyCode\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"hierarchyExternalSystemId\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"startDate\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"hierarchyType\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"chargeBack\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"endDate\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Agent on policy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAP",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyType\": \"Commissionable Hierarchy\",\r\n    \"startDate\": \"01/01/2022\",\r\n    \"endDate\": \"\",\r\n    \"policyNumber\": \"customerAPI Policy04\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"pay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Agent on policy Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyType\": \"Commissionable Hierarchy\",\r\n    \"startDate\": \"01/01/2022\",\r\n    \"endDate\": \"\",\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"pay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Agent on policy Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyType\": \"Commissionable Hierarchy\",\r\n    \"startDate\": \"01/01/2022\",\r\n    \"endDate\": \"\",\r\n    \"policyNumber\": \"customerAPI Policy07\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"pay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all mandatory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"All mandatory validations\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"carrierShortName is mandatory\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"endDate is mandatory\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"hierarchyType is mandatory\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is mandatory\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either hierarchyCode or (hierarchyExternalSystemId and startDate) is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"productItemName\": \"\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"\",\r\n    \"hierarchyType\": \"\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Policy number invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"policyNumber is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"testvdfc\",\r\n    \"carrierShortName\": \"\",\r\n    \"productItemName\": \"\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"\",\r\n    \"hierarchyType\": \"\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hierarchy code not provided",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"hierarchy code is not provided\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either hierarchyCode or (hierarchyExternalSystemId and startDate) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hierarchy code invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"hierarchyCode is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"hierarchyCode is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"hierarchyCode\": \"test\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "provided hierarchy not present on policy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"pm.test(\"hierarchy code does not exists in policy\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The Provided agent is not associated to the Policy/Enrollment with given criteria\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-003\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid hierarchy ESID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"hierarchyExternalSystemId is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"hierarchyExternalSystemId is invalid\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either hierarchyCode or (hierarchyExternalSystemId and startDate) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"34fer\",\r\n    \"startDate\": \"\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hierarchy esid not associated to arrangement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"hierarchyExternalSystemId is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Hierarchy was not found with provided hierarchyExternalSystemId\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006254\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Date is empty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Startdate is blank\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either hierarchyCode or (hierarchyExternalSystemId and startDate) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006253\",\r\n    \"startDate\": \"\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Date is text",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Startdate is text\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for startDate\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006253\",\r\n    \"startDate\": \"text\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Date is some number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Startdate is some number\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"startDate is not a valid date format\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006253\",\r\n    \"startDate\": \"2024\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Date is wrong format",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Startdate is wrong format\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"startDate is not a valid date format\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006253\",\r\n    \"startDate\": \"2021/01/01\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Date is provided and ESID is not provided",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Startdate is provided and esid is blank\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either hierarchyCode or (hierarchyExternalSystemId and startDate) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correct ESID and wrong start date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Wrong start date and correct ESID\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Hierarchy was not found with provided hierarchyExternalSystemId\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006253\",\r\n    \"startDate\": \"01/01/2023\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hierarchy type is blank",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"hierarchyType is blank\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"hierarchyType is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006253\",\r\n    \"startDate\": \"01/01/2022\",\r\n    \"hierarchyType\": \"\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hierarchy type is invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"hierarchyType is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"hierarchyType is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006253\",\r\n    \"startDate\": \"01/01/2022\",\r\n    \"hierarchyType\": \"test\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hierarchy Type is valid but not associated to policy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Hierarchy Type is valid but not associated to policy\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Hierarchy was not found with provided hierarchyExternalSystemId\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006253\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Referral hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Chargeback is invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Chargeback is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"chargeBack is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006253\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"ztest\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Chargeback is number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Chargeback is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"chargeBack is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006253\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"1\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Policy number is blank",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"policyNumber is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006253\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Policy number is invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"policyNumber is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"policyNumber\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006253\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Policy number not associated to arrangement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"pm.test(\"Policy number not associated to arrangement\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The Provided agent is not associated to the Policy/Enrollment with given criteria\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"CustomerAPI policy04\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"hierarchyCode\": \"individual351240-004\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No Policy found with provided policyNumber and carrierShortName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"No Policy found with provided policyNumber and carrierShortName\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No Policy found with provided policyNumber and carrierShortName\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"CustomerAPI policy05\",\r\n    \"carrierShortName\": \"MPC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Carrier Short name is blank",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"carrierShortName is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"carrierShortName is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"CustomerAPI policy05\",\r\n    \"carrierShortName\": \"\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Carrier Short name is invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"carrierShortName is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"carrierShortName is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"CustomerAPI policy05\",\r\n    \"carrierShortName\": \"test\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Carrier Short name is full carrier name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"carrierShortName is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for carrierShortName\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"CustomerAPI policy05\",\r\n    \"carrierShortName\": \"Alabama Insurance Company\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "agent is added on policy but provided product item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"agent is added on policy but provided product item\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Cannot perform the action as there are no active Agents exist for the selected Policy Product Item\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"CustomerAPI policy04\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "agent is added on product item but provided policy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"agent is added on policy but provided product item\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Cannot perform the action as there are no active Agents exist for the selected Policy\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"CustomerAPI policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "End Date is blank",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"endDate is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"endDate is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"CustomerAPI policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "End Date is text",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"endDate is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for endDate\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"CustomerAPI policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "End Date is some number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"endDate is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"endDate is not a valid date format\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"CustomerAPI policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"2024\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "End Date is wrong format",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"endDate is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"endDate is not a valid date format\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"CustomerAPI policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2021\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"2024/01/01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "End Date is less than start date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"pm.test(\"endDate is less than start date\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The End Date should be greater than or equal to the Agent's Start Date on the policy/Enrollment\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"CustomerAPI policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"01/01/2022\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"NO\",\r\n    \"endDate\": \"01/01/2021\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Success case, when code is provided",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"Yes\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "End the already ended agent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"agent already ended\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The provided Agent is already ended on the Policy\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy05\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"01/01/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Success case, when code is provided Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\": \"customerAPI Policy07\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"startDate\": \"\",\r\n    \"hierarchyType\": \"Commissionable hierarchy\",\r\n    \"chargeBack\": \"\",\r\n    \"endDate\": \"12/31/2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBob/endAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBob",
+						"endAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

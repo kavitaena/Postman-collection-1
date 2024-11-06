@@ -1,0 +1,2298 @@
+{
+	"info": {
+		"_postman_id": "c3e71dd0-0f77-4991-969e-cc12ac1cbdcc",
+		"name": "commissionRateFinderAPI_4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Get Token Copy 3",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataType size_02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for agentCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for policyNumber\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for hierarchyCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for date\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for schedule\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for channel\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for subChannel\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for role\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for state\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for carrier\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for productType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for product\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for policyPeriod\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for paymentType\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for insuredType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for zipCode\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"policyNumber\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"hierarchyCode\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"date\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"schedule\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"paymentType\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"subChannel\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"role\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"hierarchyType\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"carrier\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"productType\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"product\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"productItem\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"county\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"enrollmentStatus\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"planType\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"productLine\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"insuredType\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"zipCode\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"premium\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"revenue\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\",\r\n\"issueAge\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53\"\r\n}\r\n\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Fields_CRF_01 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either policyNumber or policy criteria is required\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either hierarchyCode or hierarchy criteria is required\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentCode is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"date is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"measure.policyPeriod is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"schedule is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"measure.premium is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"measure.revenue is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"measure.issueAge is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"\",\r\n\"date\": \"\",\r\n\"schedule\":\"\",\r\n\"paymentType\":\"ukhyu5656\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"\",\r\n\"premium\":\"yjy\",\r\n\"revenue\":\"yyy\",\r\n\"issueAge\":\"gjjjyj\"\r\n}\r\n\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Fields_CRF200_01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual324889\",\r\n\"policyNumber\": \"FDMAPDAEP01\",\r\n\"hierarchyCode\": \"individual324889-003\",\r\n\"date\": \"01-01-2000\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n\r\n\r\n\r\n\r\n\r\n\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"1\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "agentCode_CRF_02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentCode is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"\",\r\n\"policyNumber\": \"major sales au\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"all\",\r\n\"county\":\"all\",\r\n\"enrollmentStatus\":\"all\",\r\n\"planType\":\"\",\r\n\"productLine\":\"all\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"13\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "agentCode_CRF_03",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentCode is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual32\",\r\n\"policyNumber\": \"major sales au\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"13\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "policyNumver_CRF_04",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either policyNumber or policy criteria is required\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"alL\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"13\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n,\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "policyNumver_CRF_05",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"major au\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\": \"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"13\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hierarchyCode_CRF_06",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either hierarchyCode or hierarchy criteria is required\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"major sales au\",\r\n\"hierarchyCode\": \"\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"13\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hierarchyCode_CRF_07",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"hierarchyCode is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"major sales au\",\r\n\"hierarchyCode\": \"individual325130\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"date\": \"03/26/2024\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"13\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Date_CRF_08",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"date is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"major sales au\",\r\n\"hierarchyCode\": \"individual325130\",\r\n\"date\": \"\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"13\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Date_CRF_09",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for date\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"major sales au\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"05142024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"13\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "policyPeriod_CRF_010",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"measure.policyPeriod is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"major sales au\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"qa\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "policyPeriod_CRF_011",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Rate Not found for the given input parameter combination\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual351240\",\r\n\"policyNumber\": \"CustomerAPI policy06\",\r\n\"hierarchyCode\": \"individual351240-013\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"9999\",\r\n\"premium\":\"9999\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "policyPeriod_CRF_012",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual351240\",\r\n\"policyNumber\": \"CustomerAPI policy06\",\r\n\"hierarchyCode\": \"individual351240-013\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"1\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "schedule_CRF_013",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"schedule is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"major sales au\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"785\",\r\n\"paymentType\":\"\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "schedule_CRF_014",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"schedule is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"major sales au\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "schedule_CRF_015",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual322051\",\r\n\"policyNumber\": \"NGP0FUT12\",\r\n\"hierarchyCode\": \"individual322051-011\",\r\n\"date\": \"5/14/2024\",\r\n\"schedule\":\"we insured s\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"999\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PolicyCriteria_CRF_016",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policy.carrier is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policy.productType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policy.state is invalid\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"535289765\",\r\n\"carrier\": \"7575522\",\r\n\"productType\": \"7575\",\r\n\"product\": \"555555\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PolicyCriteria_CRF_017",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either policyNumber or policy criteria is required\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"Metropolitan Property & Casualty Insurance Company\",\r\n\"productType\": \"General Liability\",\r\n\"product\": \"General Liability P\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PolicyCriteria_CRF_018",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either policyNumber or policy criteria is required\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"mi\",\r\n\"carrier\": \"\",\r\n\"productType\": \"General Liability\",\r\n\"product\": \"General Liability P\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PolicyCriteria_CRF_019",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either policyNumber or policy criteria is required\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"mi\",\r\n\"carrier\": \"Metropolitan Property & Casualty Insurance Company\",\r\n\"productType\": \"\",\r\n\"product\": \"General Liability P\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PolicyCriteria_CRF_020",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either policyNumber or policy criteria is required\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"individual325130-016\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"mi\",\r\n\"carrier\": \"Metropolitan Property & Casualty Insurance Company\",\r\n\"productType\": \"General Liability\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PolicyCriteria_CRF_021",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual351240\",\r\n\"policyNumber\": \"\",\r\n\"hierarchyCode\": \"individual351240-013\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"al\",\r\n\"carrier\": \"Alabama Insurance Company\",\r\n\"productType\": \"General Liability\",\r\n\"product\": \"Alabama Product\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PolicyCriteria_CRF_022",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual351240\",\r\n\"policyNumber\": \"CustomerAPI policy06\",\r\n\"hierarchyCode\": \"individual351240-013\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"al\",\r\n\"carrier\": \"Alabama Insurance Company\",\r\n\"productType\": \"General Liability\",\r\n\"product\": \"Alabama Product\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PolicyCriteria_CRF_023",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either hierarchyCode or hierarchy criteria is required\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"major sales au\",\r\n\"hierarchyCode\": \"\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"mi\",\r\n\"carrier\": \"Metropolitan Property & Casualty Insurance Company\",\r\n\"productType\": \"General Liability\",\r\n\"product\": \"General Liability P\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HierarchyCriteria_CRF_024",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"hierarchy.channel is invalid\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual325130\",\r\n\"policyNumber\": \"major sales au\",\r\n\"hierarchyCode\": \"\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"4589\",\r\n\"subChannel\": \"555555555\",\r\n\"role\": \"5844\",\r\n\"hierarchyType\": \"5554444\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"mi\",\r\n\"carrier\": \"Metropolitan Property & Casualty Insurance Company\",\r\n\"productType\": \"General Liability\",\r\n\"product\": \"General Liability P\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HierarchyCriteria_CRF_025",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual351240\",\r\n\"policyNumber\": \"CustomerAPI policy06\",\r\n\"hierarchyCode\": \"\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"We Insured Channel\",\r\n\"subChannel\": \"We Insured Sub Channel\",\r\n\"role\": \"General Agent\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"mi\",\r\n\"carrier\": \"Metropolitan Property & Casualty Insurance Company\",\r\n\"productType\": \"General Liability\",\r\n\"product\": \"General Liability P\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"1\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HierarchyCriteria_CRF_026",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual351240\",\r\n\"policyNumber\": \"CustomerAPI policy06\",\r\n\"hierarchyCode\": \"individual351240-013\",\r\n\"date\": \"03/26/2021\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"We Insured Channel\",\r\n\"subChannel\": \"We Insured Sub Channel\",\r\n\"role\": \"General Agent\",\r\n\"hierarchyType\": \"Commissionable Hierarchy\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"al\",\r\n\"carrier\": \"Alabama Insurance Company\",\r\n\"productType\": \"General Liability\",\r\n\"product\": \"Alabama Product\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HierarchyCriteria200_CRF_027",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual351240\",\r\n\"policyNumber\": \"CustomerAPI policy06\",\r\n\"hierarchyCode\": \"individual351240-013\",\r\n\"date\": \"03/26/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"1\",\r\n\"revenue\":\"1\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HierarchyCriteria200_CRF_028",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Please Provide The Value for Measures Premium\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"firm630781\",\r\n\"policyNumber\": \"Same TAXID Policy\",\r\n\"hierarchyCode\": \"\",\r\n\"date\": \"04/29/2024\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"We Insured Channel\",\r\n\"subChannel\": \"We Insured Sub Channel\",\r\n\"role\": \"General Agent\",\r\n\"hierarchyType\": \"commissionable hierarchy\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"premium\":\"\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HierarchyCriteria(referr)_CRF_030",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual351240\",\r\n\"policyNumber\": \"CustomerAPI policy02\",\r\n\"hierarchyCode\": \"individual351240-004\",\r\n\"date\": \"07/14/2023\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"\",\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"We Insured Channel\",\r\n\"subChannel\": \"We Insured Sub Channel\",\r\n\"role\": \"Managing General Agent\",\r\n\"hierarchyType\": \"referral hierarchy\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"\",\r\n\"product\": \"\",\r\n\"productItem\":\"\",\r\n\"county\":\"\",\r\n\"enrollmentStatus\":\"\",\r\n\"planType\":\"\",\r\n\"productLine\":\"\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n},\r\n\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"12\",\r\n\"issueAge\":\"999\",\r\n\"premium\":\"1\",\r\n\"revenue\":\"\"\r\n\r\n\r\n}\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Duplicate validation_CRF_033",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentType is invalid\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual322749\",\r\n\"policyNumber\": \"Policy Jan 6617\",\r\n\"hierarchyCode\": \"individual322749-007\",\r\n\"date\": \"01/17/2023\",\r\n\"schedule\":\"WE Insured S\",\r\n\"paymentType\":\"Alllj\",\r\n\"commissionEvent\":\"\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"all\",\r\n\"carrier\": \"all\",\r\n\"productType\": \"all\",\r\n\"product\": \"all\",\r\n\"productItem\":\"all\",\r\n\"county\":\"all\",\r\n\"enrollmentStatus\":\"all\",\r\n\"planType\":\"all\",\r\n\"productLine\":\"all\",\r\n\"insuredType\":\"all\"\r\n\r\n\r\n\r\n\r\n\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"11\",\r\n\"premium\":\"999\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "measures_CRF_034",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"measure.policyPeriod is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"measure.premium is invalid\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual322749\",\r\n\"policyNumber\": \"Policy Jan 6617\",\r\n\"hierarchyCode\": \"individual322749-007\",\r\n\"date\": \"01/17/2023\",\r\n\"schedule\":\"VSFC SChedule\",\r\n\"paymentType\":\"alL\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"all\",\r\n\"product\": \"all\",\r\n\"productItem\":\"all\",\r\n\"county\":\"all\",\r\n\"enrollmentStatus\":\"all\",\r\n\"planType\":\"\",\r\n\"productLine\":\"all\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n\r\n\r\n\r\n\r\n\r\n\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"1.5\",\r\n\"premium\":\"1.5\",\r\n\"revenue\":\"\",\r\n\"issueAge\":\"\"\r\n}\r\n\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "measures_CRF_035",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Percentage\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"6\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"agentCode\": \"individual322749\",\r\n\"policyNumber\": \"Policy Jan 6617\",\r\n\"hierarchyCode\": \"individual322749-007\",\r\n\"date\": \"2024\",\r\n\"schedule\":\"VSFC SChedule\",\r\n\"paymentType\":\"alL\",\r\n\r\n\"hierarchy\":\r\n\r\n{\r\n\"channel\": \"\",\r\n\"subChannel\": \"\",\r\n\"role\": \"\",\r\n\"hierarchyType\": \"\"\r\n}\r\n,\r\n\"policy\":\r\n\r\n{\r\n\"state\": \"\",\r\n\"carrier\": \"\",\r\n\"productType\": \"all\",\r\n\"product\": \"all\",\r\n\"productItem\":\"all\",\r\n\"county\":\"all\",\r\n\"enrollmentStatus\":\"all\",\r\n\"planType\":\"\",\r\n\"productLine\":\"all\",\r\n\"insuredType\":\"\",\r\n\"zipCode\":\"\"\r\n\r\n\r\n\r\n\r\n\r\n\r\n}\r\n,\r\n\"measure\":\r\n\r\n{\r\n\"policyPeriod\": \"16\",\r\n\"premium\":\"1\",\r\n\"revenue\":\"2\",\r\n\"issueAge\":\"2\"\r\n}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/commission/commissionRate",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"commission",
+						"commissionRate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

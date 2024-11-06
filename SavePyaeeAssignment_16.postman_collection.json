@@ -1,0 +1,3857 @@
+{
+	"info": {
+		"_postman_id": "40f2083b-72ba-49ce-9368-c2a891ec73a9",
+		"name": "SavePyaeeAssignment_16",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Get Token Copy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no values _01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeStartDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"commissionType is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"entityType is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNOrTaxId) or (payeeExternalSystemId and payeeExternalSystemType) is required to identify a Payee\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all invalid values and datatype validations _02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for entityType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for entityCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for agentType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for agentSSNorTaxId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for contractName\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for contractStartDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for hierarchyExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for hierarchyESIDEffectiveDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeSSNOrTaxId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeStartDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeEndDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for percentage\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeExternalSystemType\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"entityType\": \"gfhgh@1fhfgjhjhtht34567876543dfbnbbnm\",\r\n\"entityCode\": \"gfhgh@1fhfgjhjhtht34567876543dfbnbbnm@#dfgh####dgfh......``~tr1234\",\r\n\"agentType\":\"hththf@#$43fhhgj@56765434\",\r\n\"agentSSNorTaxId\":\"@#dfgh####dgfh......``~tr1234@#dfgh####dgfh......``~tr1234\",\r\n\"contractName\": \"gfhgh@1@#dfgh####dgfh......``~tr1234@#dfgh####dgfh......``~tr1234\",\r\n\"carrier\": \"gfhgh@1@#dfgh####dgfh......``~tr1234\",\r\n\"contractStartDate\": \"gfhgh@fdhfgfjghk@3456781@#dfgh####dgfh......``~tr1234\",\r\n\"hierarchyExternalSystemId\": \"gfhgh@1@#dfgh####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234\",\r\n\"hierarchyESIDEffectiveDate\": \"01-25-202gfhgh@1@#dfgh####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234\",\r\n\"payeeCode\": \"gfhgh@1gfhgh@1@#dfgh####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234\",\r\n\"payeeType\": \"gfhgh@1gfhgh@1@#dfgh####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234\",\r\n\"payeeSSNOrTaxId\": \"gfhgh@1gfhgh@1@#dfgh####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234\",\r\n\"payeeExternalSystemId\": \"dgfgfhgh@1@#dfgh####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234h\",\r\n\"payeeExternalSystemType\": \"fhgggfg####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234fhgggfg####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234fhgggfg####dgffhgggfg####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234fhgggfg####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234fhgggfg####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234fhgggfg####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234fhgggfg####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234h......`@#dfgh####dgfh......``~tr1234`~tr1234fhgggfg####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234\",\r\n\"payeeStartDate\": \"fhgdfhgngn@fhgjgfhgh@1@#dfgh####dgfh......`@#dfgh####dgfh......``~tr1234`~tr123444\",\r\n\"payeeEndDate\": \"gfhfhggfhgh@1@#dfgh####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234\",\r\n\"commissionType\": \"ghkkgfhgh@1@#dfgh####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234\",\r\n\"assignmentType\": \"bfhghggfhgh@1@#dfgh####dgfh......`@#dfgh####dgfh......``~tr1234`~tr1234\",\r\n\"percentage\": \"gjgbn@123gfhgh@1@#dfgh####dgfh......`@#dfgh####dgfh......``~tr1234`~tr12343\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid entity type _03",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeStartDate is mandatory\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"commissionType is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"entityType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNOrTaxId) or (payeeExternalSystemId and payeeExternalSystemType) is required to identify a Payee\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"cont\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "entity type as hierarchy  (contract level) _04",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Hierarchy level Payee not allowed when Agent Contract level balances maintained in system\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNOrTaxId) or (payeeExternalSystemId and payeeExternalSystemType) is required to identify a Payee\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (hierarchyExternalSystemId and hierarchyESIDEffectiveDate), is required to identify the Hierarchy, when account balances are maintained at Hierarchy level\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"hierarchy\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-21-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "entity type as contract  (contract level) _05",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNOrTaxId) or (payeeExternalSystemId and payeeExternalSystemType) is required to identify a Payee\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (agentType, agentSSNorTaxId, contractName, carrier and contractStartDate) is required to identify the Contract, when account balances are maintained at Agent Contract level\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"No Payee found with given payeeExternalSystemType and payeeExternalSystemId\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"CONTRACT\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-21-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "entity type as contract_200  (contract level) _06",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93818280\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contract code not exist _07",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No Contract found with entityType and entityCode\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-938182800000000\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "200_contract code  exist and inactive _08",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93831591\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "only contract name _09",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (agentType, agentSSNorTaxId, contractName, carrier and contractStartDate) is required to identify the Contract, when account balances are maintained at Agent Contract level\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"WE Insured Contract\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "only carrier _010",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (agentType, agentSSNorTaxId, contractName, carrier and contractStartDate) is required to identify the Contract, when account balances are maintained at Agent Contract level\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "only contract start date_011",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (agentType, agentSSNorTaxId, contractName, carrier and contractStartDate) is required to identify the Contract, when account balances are maintained at Agent Contract level\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"08-21-2024\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contract start and contract name date_012",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (agentType, agentSSNorTaxId, contractName, carrier and contractStartDate) is required to identify the Contract, when account balances are maintained at Agent Contract level\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"we insured contract\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"08-21-2024\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contract start date and carrier 013",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (agentType, agentSSNorTaxId, contractName, carrier and contractStartDate) is required to identify the Contract, when account balances are maintained at Agent Contract level\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"08-21-2024\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "only contract name and carrier_02 Copy 11",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (agentType, agentSSNorTaxId, contractName, carrier and contractStartDate) is required to identify the Contract, when account balances are maintained at Agent Contract level\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"we insured contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "entity code with contract criteria _Copy 12",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93831591\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"we insured contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"08-21-2024\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contract with hierarchy code _Copy 13",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No Contract found with entityType and entityCode\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"individual310766-001\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"we insured contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"08-21-2024\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "multiple contracts found _Copy 13 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (agentType, agentSSNorTaxId, contractName, carrier and contractStartDate) is required to identify the Contract, when account balances are maintained at Agent Contract level\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"We insured contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"01/01/2021\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subquery validation issue _Copy 13 Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-09999986\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"We insured contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"01/01/2021\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "only entitycode no agentType and agent SSN or taxid_Copy 13 Copy 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93829624\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"We insured contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"08/30/2022\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "agentType is invalid  _Copy 13 Copy 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"agentType is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93829624\",\r\n    \"agentType\":\"affiliate\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"We insured contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"08/30/2022\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "multiple agent details_Copy 13 Copy 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Multiple Contracts found with given details\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93831614\",\r\n    \"agentType\":\"individual\",\r\n    \"agentSSNorTaxId\":\"252-54-1585\",\r\n    \"contractName\": \"We insured contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"01/01/2021\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contract criteria _Copy 13 Copy 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"individual\",\r\n    \"agentSSNorTaxId\":\"252-54-1585\",\r\n    \"contractName\": \"We insured contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"01/01/2021\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No contract found no contract exist on agent _Copy 13 Copy 7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No Contract found with contractName, carrier and contractStartDate\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"individual\",\r\n    \"agentSSNorTaxId\":\"252-54-1585\",\r\n    \"contractName\": \"White Walkers contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"01/01/2021\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No contract startdate_Copy 13 Copy 8",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (agentType, agentSSNorTaxId, contractName, carrier and contractStartDate) is required to identify the Contract, when account balances are maintained at Agent Contract level\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"individual\",\r\n    \"agentSSNorTaxId\":\"252-54-1585\",\r\n    \"contractName\": \"White Walkers contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No agentSSNorTaxid_Copy 13 Copy 9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (agentType, agentSSNorTaxId, contractName, carrier and contractStartDate) is required to identify the Contract, when account balances are maintained at Agent Contract level\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"individual\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"White Walkers contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"01-01-2021\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "diff agentType and diff SSNorTaxId_ 13 Copy 10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Provided agentSSNorTaxId is not matching with given agentType\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"firm\",\r\n    \"agentSSNorTaxId\":\"252-54-1585\",\r\n    \"contractName\": \"White Walkers contract\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"01-01-2021\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hierarchy ESID and Date (Contract level) _Copy 13 Copy 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (agentType, agentSSNorTaxId, contractName, carrier and contractStartDate) is required to identify the Contract, when account balances are maintained at Agent Contract level\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006254\",\r\n    \"hierarchyESIDEffectiveDate\": \"01/01/2021\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invalid dates _Copy 13 Copy 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (agentType, agentSSNorTaxId, contractName, carrier and contractStartDate) is required to identify the Contract, when account balances are maintained at Agent Contract level\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"contractStartDate is not a valid date format\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"hierarchyESIDEffectiveDate is not a valid date format\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeEndDate is not a valid date format\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeStartDate is not a valid date format\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"01/01/24\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"01/01/24\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"01/01/24\",\r\n    \"payeeEndDate\": \"01/01/24\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "only payeetype and as affiliate _Copy 13 Copy 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNOrTaxId) or (payeeExternalSystemId and payeeExternalSystemType) is required to identify a Payee\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"No Payee found with given payeeExternalSystemType and payeeExternalSystemId\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93827521\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"affiliate\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-21-2024\",\r\n    \"payeeEndDate\": \"08-21-2024\",\r\n    \"commissionType\": \"bonus\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10.0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "diff PayeeSSNorTaxID and Type_Copy 13 Copy 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Provided payeeSSNorTaxId is not matching with given payeeType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"No Payee found with given payeeExternalSystemType and payeeExternalSystemId\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93827521\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"firm\",\r\n    \"payeeSSNOrTaxId\": \"252-54-1585\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-21-2024\",\r\n    \"payeeEndDate\": \"08-21-2024\",\r\n    \"commissionType\": \"bonus\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10.0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All different payee criteria_Copy 13 Copy 7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No Payee found with given payeeCode OR (payeeType and payeeSSNorTaxId) OR (payeeExternalSystemType and payeeExternalSystemId)\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93827521\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"individual\",\r\n    \"payeeSSNOrTaxId\": \"252-54-1585\",\r\n    \"payeeExternalSystemId\": \"0000005638\",\r\n    \"payeeExternalSystemType\": \"ENTITYIDNO\",\r\n    \"payeeStartDate\": \"08-21-2024\",\r\n    \"payeeEndDate\": \"08-21-2024\",\r\n    \"commissionType\": \"bonus\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10.0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "end date should be greater than start date_Copy 13 Copy 8",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeEndDate should be greater than or equal to payeeStartDate\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93827521\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"individual\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"0000006254\",\r\n    \"payeeExternalSystemType\": \"entityidno\",\r\n    \"payeeStartDate\": \"08-22-2024\",\r\n    \"payeeEndDate\": \"08-21-2024\",\r\n    \"commissionType\": \"Commission\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contract through load_Copy 13 Copy 9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93831614\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-01-2024\",\r\n    \"payeeEndDate\": \"08-02-2024\",\r\n    \"commissionType\": \"bonus\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "assign payee on contract with all criteria_Copy 13 Copy 10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93831614\",\r\n    \"agentType\":\"individual\",\r\n    \"agentSSNorTaxId\":\"252-54-1585\",\r\n    \"contractName\": \"White Walkers contract\",\r\n    \"carrier\": \"WWC\",\r\n    \"contractStartDate\": \"08-23-2024\",\r\n    \"hierarchyExternalSystemId\": \"0000006254\",\r\n    \"hierarchyESIDEffectiveDate\": \"01/01/2021\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"individual\",\r\n    \"payeeSSNOrTaxId\": \"252-54-1585\",\r\n    \"payeeExternalSystemId\": \"0000006256\",\r\n    \"payeeExternalSystemType\": \"Entityidno\",\r\n    \"payeeStartDate\": \"08-02-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"Commission\",\r\n    \"assignmentType\": \"regular\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "entitytype and code as contract (carrier level)13 Copy 11",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"carrier level\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"carrier level\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Contract level Payee not allowed when Carrier level balances maintained in system\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93831614\",\r\n    \"agentType\":\"individual\",\r\n    \"agentSSNorTaxId\":\"252-54-1585\",\r\n    \"contractName\": \"White Walkers contract\",\r\n    \"carrier\": \"WWC\",\r\n    \"contractStartDate\": \"08-23-2024\",\r\n    \"hierarchyExternalSystemId\": \"0000006254\",\r\n    \"hierarchyESIDEffectiveDate\": \"01/01/2021\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"individual\",\r\n    \"payeeSSNOrTaxId\": \"252-54-1585\",\r\n    \"payeeExternalSystemId\": \"0000006256\",\r\n    \"payeeExternalSystemType\": \"Entityidno\",\r\n    \"payeeStartDate\": \"08-02-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"Commission\",\r\n    \"assignmentType\": \"regular\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "entitycode of contract code(carrier level)13 Copy 12",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No Hierarchy found with entityType and entityCode\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"hierarchy\",\r\n    \"entityCode\": \"C-93831614\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006254\",\r\n    \"hierarchyESIDEffectiveDate\": \"01/01/2021\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"individual\",\r\n    \"payeeSSNOrTaxId\": \"252-54-1585\",\r\n    \"payeeExternalSystemId\": \"0000006256\",\r\n    \"payeeExternalSystemType\": \"Entityidno\",\r\n    \"payeeStartDate\": \"08-02-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"Commission\",\r\n    \"assignmentType\": \"regular\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contract criteria(carrier level)13 Copy 13",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either entityCode or (hierarchyExternalSystemId and hierarchyESIDEffectiveDate), is required to identify the Hierarchy, when account balances are maintained at Hierarchy level\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No Hierarchy found with hierarchyExternalSystemId and hierarchyESIDEffectiveDate\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"hierarchy\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"individual\",\r\n    \"agentSSNorTaxId\":\"252-54-1585\",\r\n    \"contractName\": \"White Walkers contract\",\r\n    \"carrier\": \"WWC\",\r\n    \"contractStartDate\": \"08-23-2024\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"individual\",\r\n    \"payeeSSNOrTaxId\": \"252-54-1585\",\r\n    \"payeeExternalSystemId\": \"0000006256\",\r\n    \"payeeExternalSystemType\": \"Entityidno\",\r\n    \"payeeStartDate\": \"08-02-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"Commission\",\r\n    \"assignmentType\": \"regular\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "entity code as hierarchy code(carrier level)13 Copy 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"hierarchy\",\r\n    \"entityCode\": \"individual351240-001\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-02-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"regular\",\r\n    \"percentage\": \"20\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hierarchy ESID and effective date(carrier level)13 Copy 15",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"hierarchy\",\r\n    \"entityCode\": \"\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"0000006291\",\r\n    \"hierarchyESIDEffectiveDate\": \"01-01-2021\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-21-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"commission\",\r\n    \"assignmentType\": \"regular\",\r\n    \"percentage\": \"20\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "multiple Taxid13 Copy 16",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Multiple records found with provided payeeType and payeeSSNorTaxId, please provide additional identifiers like payeeCode OR (payeeExternalSystemType and payeeExternalSystemId)\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"No Payee found with given payeeExternalSystemType and payeeExternalSystemId\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"hierarchy\",\r\n    \"entityCode\": \"C-93818280\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"firm\",\r\n    \"payeeSSNOrTaxId\": \"99-9888815\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"commission\",\r\n    \"assignmentType\": \"regular\",\r\n    \"percentage\": \"20\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "selected payee already exist(carrier level)13 Copy 15",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Selected Payee already exists within the duration\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"hierarchy\",\r\n    \"entityCode\": \"firm627982-001\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-28-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"commission\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"20\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "selected payee already exist(contract level)13 Copy 16",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Selected Payee already exists within the duration\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93827520\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"01/01/2021\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"20\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add another payee after the duration with same details(contract level)13 Copy 17",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Selected Payee already exists within the duration\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93827520\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"01/01/2022\",\r\n    \"payeeEndDate\": \"12-30-2022\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"20\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "percentage as more that 100_13 Copy 18",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"percentage must be greater than or equal to 0.1 and less than or equal to 100.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93827520\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"01/02/2021\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"commission\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"545\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "commission without percentage _13 Copy 19",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"percentage is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93827520\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"01/02/2021\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"commission\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "commission without percentage _13 Copy 20",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for percentage\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93827520\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"01/02/2021\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"commission\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"545fdhgfj\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bonus without percentage _13 Copy 21",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93827520\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"01/02/2021\",\r\n    \"payeeEndDate\": \"02/02/2024\",\r\n    \"commissionType\": \"bonus\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no contract found_13 Copy 19",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93816871\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"Redo Contract Name\",\r\n    \"carrier\": \"mpc\",\r\n    \"contractStartDate\": \"08-21-2025\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeStartDate\": \"08-20-2024\",\r\n    \"payeeEndDate\": \"\",\r\n    \"commissionType\": \"all\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No payee found_13 Copy 20",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No Payee found with given payeeExternalSystemType and payeeExternalSystemId\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"contract\",\r\n    \"entityCode\": \"C-93827521\",\r\n    \"agentType\":\"\",\r\n    \"agentSSNorTaxId\":\"\",\r\n    \"contractName\": \"\",\r\n    \"carrier\": \"\",\r\n    \"contractStartDate\": \"\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyESIDEffectiveDate\": \"\",\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"individual\",\r\n    \"payeeSSNOrTaxId\": \"\",\r\n    \"payeeExternalSystemId\": \"0000006254\",\r\n    \"payeeExternalSystemType\": \"producer code\",\r\n    \"payeeStartDate\": \"08-22-2024\",\r\n    \"payeeEndDate\": \"08-22-2024\",\r\n    \"commissionType\": \"Commission\",\r\n    \"assignmentType\": \"\",\r\n    \"percentage\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePayeeAssignment?pageIndex=1&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePayeeAssignment"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

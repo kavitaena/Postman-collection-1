@@ -1,0 +1,3661 @@
+{
+	"info": {
+		"_postman_id": "87743dda-2a2c-4790-a885-655c14ced13c",
+		"name": "Replace_Agent_On_Policy_13",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DataType Size",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Policy number is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"\",\r\n    \"carrierShortName\": \"\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"\",\r\n    \"replacedAgentEndDate\": \"\",\r\n    \"replacedHierarchyType\": \"\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC01 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Policy number is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for policyNumber\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for carrierShortName\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacedAgentHierarchyCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacedAgentHierarchyExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacedAgentStartDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacedAgentEndDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacedHierarchyType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacedAgentChargeBack\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacingAgentHierarchyCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacingAgentHierarchyExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacingAgentStartDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacingAgentEndDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacingAgentPay\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"carrierShortName\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"productItemName\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"replacedAgentHierarchyCode\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"replacedAgentStartDate\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"replacedAgentEndDate\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"replacedHierarchyType\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"replacedAgentChargeBack\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"replacingAgentHierarchyCode\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"replacingAgentStartDate\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"replacingAgentEndDate\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\",\r\n    \"replacingAgentPay\": \"QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG!@#wertyusxcb!@#$5345678pageQWDFG!@#123456123456@#$fh_53QWDFG\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Agent on policy Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hierarchyCode\": \"individual351240-002\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyType\": \"Commissionable Hierarchy\",\r\n    \"startDate\": \"01/01/2022\",\r\n    \"endDate\": \"\",\r\n    \"policyNumber\": \"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"pay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Agent on policy Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hierarchyCode\": \"individual351240-004\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyType\": \"Commissionable Hierarchy\",\r\n    \"startDate\": \"01/01/2022\",\r\n    \"endDate\": \"\",\r\n    \"policyNumber\": \"customerAPI Policy02\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"pay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Agent on policy Copy 3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hierarchyCode\": \"individual351241-006\",\r\n    \"hierarchyExternalSystemId\": \"\",\r\n    \"hierarchyType\": \"Commissionable Hierarchy\",\r\n    \"startDate\": \"01/01/2022\",\r\n    \"endDate\": \"\",\r\n    \"policyNumber\": \"customerAPI Policy03\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"pay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/addAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"addAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Policy number is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"624485B\",\r\n    \"replacedAgentStartDate\": \"05/01/2024\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC02",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Policy number is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"policyNumber is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"624485B\",\r\n    \"replacedAgentStartDate\": \"05/01/2024\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC03",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Policy number is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No Policy found with provided policyNumber and carrierShortName\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"MPC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"05/01/2024\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC04",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"carrier is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"carrierShortName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUSerName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"05/01/2024\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC05",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"carrier is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"carrierShortName is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"test\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"05/01/2024\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC06",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"product item is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"productItemName is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"test\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"05/01/2024\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC07",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Agent not forund on product item\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Cannot perform the action as there are no active Agents exist for the selected Policy/Enrollment Product Item\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"05/01/2024\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC08",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Hierachy Code not provided\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either (replacedAgentHierarchyCode and replacedHierarchyType) or (replacedAgentHierarchyExternalSystemId and replacedAgentStartDate and replacedHierarchyType) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"05/01/2024\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC09",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Replaced Hierachy Code is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacedAgentHierarchyCode is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"test\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"05/01/2024\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"hierarchy Type is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacedHierarchyType is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"05/01/2024\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC11",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacedHierarchyType is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacedHierarchyType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"05/01/2024\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"test\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC12",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Provided agent does not exists\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The Provided agent is not associated to the Policy/Enrollment with given criteria\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-001\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"05/01/2024\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC13",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Mandatory fields of replaced hierarchy are not provided\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either (replacedAgentHierarchyCode and replacedHierarchyType) or (replacedAgentHierarchyExternalSystemId and replacedAgentStartDate and replacedHierarchyType) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacedAgentHierarchyExternalSystemId is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacedAgentHierarchyExternalSystemId is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"test2\",\r\n    \"replacedAgentStartDate\": \"\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC15",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacedAgentHierarchyExternalSystemId is not present on policy\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Hierarchy was not found with provided replacedAgentHierarchyExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"0000006252\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC16",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Provided ESID not present on arrangement\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacedAgentHierarchyExternalSystemId is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"individual351240\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC17",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Start date is not provided\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either (replacedAgentHierarchyCode and replacedHierarchyType) or (replacedAgentHierarchyExternalSystemId and replacedAgentStartDate and replacedHierarchyType) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"individual351240\",\r\n    \"replacedAgentStartDate\": \"\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC18",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Start date is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacedAgentStartDate\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"individual351240\",\r\n    \"replacedAgentStartDate\": \"test\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC19",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Start date is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacedAgentStartDate is not a valid date format\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"individual351240\",\r\n    \"replacedAgentStartDate\": \"2024/01/01\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC20",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"ESID not present on policy\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Hierarchy was not found with provided replacedAgentHierarchyExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"0000006252\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC21",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacedAgentEndDate is mandatory\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacedAgentEndDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"0000006252\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacedAgentEndDate is not a valid date format\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacedAgentEndDate is not a valid date format\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"2022\",\r\n    \"replacedAgentEndDate\": \"2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC23",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacedAgentEndDate is not a valid date format\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacedAgentEndDate is not a valid date format\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"2024/01/01\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC24",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replaced hierarchy type is not matching with the provided value\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The Provided agent is not associated to the Policy/Enrollment with given criteria\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Referral hierarchy\",\r\n    \"replacedAgentChargeBack\": \"Yes\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC25",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacedAgentChargeBack is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacedAgentChargeBack is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"test\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC26",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacedAgentChargeBack is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacedAgentChargeBack is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"0\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC27",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Replacing hierarchy code is not provided\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either replacingAgentHierarchyCode or replacingAgentHierarchyExternalSystemId is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC28",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Replacing hierarchy code is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacingAgentHierarchyCode is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"test\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC29",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Replacing ESID is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacingAgentHierarchyExternalSystemId is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"000000625\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC30",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Replacing ESID is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacingAgentHierarchyExternalSystemId is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"individual351241\",\r\n    \"replacingAgentStartDate\": \"06/11/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC31",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Replacingstart date is not provided\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacingAgentStartDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC32",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Replacingstart date is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacingAgentStartDate\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"test\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC33",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Replacingstart date is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacingAgentStartDate\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"30/05/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC34",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"The replacingAgentStartDate should be greater than replacedAgentEndDate\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The replacingAgentStartDate should be greater than replacedAgentEndDate\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"05/30/2024\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC35",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacingAgentEndDate is not a valid date format\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for replacingAgentEndDate\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/01/2024\",\r\n    \"replacingAgentEndDate\": \"test\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC36",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"The replacingAgentEndDate should be greater than or equal to replacingAgentStartDate\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The replacingAgentEndDate should be greater than or equal to replacingAgentStartDate\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/01/2024\",\r\n    \"replacingAgentEndDate\": \"05/30/2024\",\r\n    \"replacingAgentPay\": \"Yes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC37",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacingAgentPay is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacingAgentPay is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/01/2024\",\r\n    \"replacingAgentEndDate\": \"06/30/2024\",\r\n    \"replacingAgentPay\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC38",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacingAgentPay is invalid\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"replacingAgentPay is invalid\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/01/2024\",\r\n    \"replacingAgentEndDate\": \"06/30/2024\",\r\n    \"replacingAgentPay\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC39",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Replacing startdate not matching with arrangement start date\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Policy/Enrollment can't be transferred as New Agent's duration doesn't fall into the duration of the New Arrangement.\");\r",
+							"});\r",
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-012\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/01/2024\",\r\n    \"replacingAgentEndDate\": \"06/30/2024\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC40",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacing carrier not matching with policy carrier\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Arrangement criteria is not matching with the Policy/Enrollment criteria.\");\r",
+							"});\r",
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-003\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/01/2024\",\r\n    \"replacingAgentEndDate\": \"06/30/2024\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC41",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"replacing carrier not matching with policy state\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Agent Arrangement criteria is not matching with the Policy/Enrollment criteria.\");\r",
+							"});\r",
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/01/2024\",\r\n    \"replacingAgentEndDate\": \"06/30/2024\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agent Eligibility",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"sales auth check\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Override(s) are not eligible.\");\r",
+							"     pm.expect(pm.response.text()).to.include(\"Agent is not eligible.\");\r",
+							"});\r",
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351198-004\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/01/2024\",\r\n    \"replacingAgentEndDate\": \"06/30/2024\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC43",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"New agent end date greater than arrangement end date\", function () {\r",
+							"     pm.expect(pm.response.text()).to.include(\"Policy/Enrollment can't be transferred as New Agent's duration doesn't fall into the duration of the New Arrangement.\");\r",
+							"});\r",
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"01/01/2023\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-012\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"01/02/2023\",\r\n    \"replacingAgentEndDate\": \"06/30/2024\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC46",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy02\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"SFprdit\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-004\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2023\",\r\n    \"replacedAgentEndDate\": \"05/30/2023\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/01/2023\",\r\n    \"replacingAgentEndDate\": \"06/30/2024\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC45",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"customerAPI Policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"05/30/2024\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"06/01/2024\",\r\n    \"replacingAgentEndDate\": \"06/30/2024\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC47",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"When Provided replaced ESID is not associated to any Arrangement\", function () {\r",
+							"     pm.expect(pm.response.text()).to.include(\"Agent Hierarchy was not found with provided replacedAgentHierarchyExternalSystemI\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"CustomerAPI policy03\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"624487A\",\r\n    \"replacedAgentStartDate\": \"01/03/2022\",\r\n    \"replacedAgentEndDate\": \"01/01/2022\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"12/30/2022\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC48",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"When Provided replacing ESID is not associated to any Arrangement\", function () {\r",
+							"     pm.expect(pm.response.text()).to.include(\"Agent Hierarchy was not found with provided replacingAgentHierarchyExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"CustomerAPI policy03\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/03/2022\",\r\n    \"replacedAgentEndDate\": \"01/01/2022\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"624487A\",\r\n    \"replacingAgentStartDate\": \"12/30/2022\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC49",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Replaced ESID and Replacing ESID is not matching\", function () {\r",
+							"     pm.expect(pm.response.text()).to.include(\"No Hierarchy found with the given replacedAgentHierarchyCode and (replacedAgentHierarchyExternalSystemId and startDate)\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"CustomerAPI policy03\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"624487A\",\r\n    \"replacedAgentStartDate\": \"01/03/2020\",\r\n    \"replacedAgentEndDate\": \"01/01/2022\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"12/30/2022\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "wrong start date and correct hierarchy code and ESID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Reaplced ESID and Start date are not matching and provided replaced code\", function () {\r",
+							"     pm.expect(pm.response.text()).to.include(\"No Hierarchy found with the given replacedAgentHierarchyCode and (replacedAgentHierarchyExternalSystemId and startDate)\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"CustomerAPI policy03\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"0000006254\",\r\n    \"replacedAgentStartDate\": \"01/03/2022\",\r\n    \"replacedAgentEndDate\": \"01/01/2022\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"12/30/2022\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC51",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Reaplcing ESID and Start date are not matching and provided replacing code\", function () {\r",
+							"     pm.expect(pm.response.text()).to.include(\"No Hierarchy found with the given replacingAgentHierarchyCode and (replacingAgentHierarchyExternalSystemId and startDate)\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"CustomerAPI policy03\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351241-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"\",\r\n    \"replacedAgentEndDate\": \"01/04/2020\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"0000006253\",\r\n    \"replacingAgentStartDate\": \"01/05/2020\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC52",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"CustomerAPI policy03\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351241-006\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2021\",\r\n    \"replacedAgentEndDate\": \"12/31/2022\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",    \r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"01/01/2023\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agent already ended on policy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"The provided replaced Agent is already ended on the Policy/Enrollment\", function () {\r",
+							"     pm.expect(pm.response.text()).to.include(\"The provided replaced Agent is already ended on the Policy/Enrollment\");\r",
+							"});\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"CustomerAPI policy03\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351241-006\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/03/2022\",\r\n    \"replacedAgentEndDate\": \"01/01/2022\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",\r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"12/30/2022\",\r\n    \"replacingAgentEndDate\": \"\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC53",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"pm.test(\"same agent with different arrangement\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Policy/Enrollment can't be transferred as more than one primary agent exists with in the same duration\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"CustomerAPI policy03\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2023\",\r\n    \"replacedAgentEndDate\": \"12/30/2023\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",    \r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-010\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"12/31/2023\",\r\n    \"replacingAgentEndDate\": \"06/05/2024\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC54",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"verify end date validation\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The replacingAgentStartDate should be greater than replacedAgentEndDate\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"CustomerAPI policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"01/01/2023\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",    \r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-010\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"12/30/2022\",\r\n    \"replacingAgentEndDate\": \"06/05/2024\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace Agent on policy_TC55",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"verify end date validation\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The replacingAgentStartDate should be greater than replacedAgentEndDate\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "producerUserName",
+						"value": "KavitaCustomerAPI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"policyNumber\":\"CustomerAPI policy01\",\r\n    \"carrierShortName\": \"AIC\",\r\n    \"productItemName\": \"\",\r\n    \"replacedAgentHierarchyCode\": \"individual351240-002\",\r\n    \"replacedAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacedAgentStartDate\": \"01/01/2022\",\r\n    \"replacedAgentEndDate\": \"01/01/2023\",\r\n    \"replacedHierarchyType\": \"Commissionable hierarchy\",    \r\n    \"replacedAgentChargeBack\": \"\",\r\n    \"replacingAgentHierarchyCode\": \"individual351241-010\",\r\n    \"replacingAgentHierarchyExternalSystemId\": \"\",\r\n    \"replacingAgentStartDate\": \"12/30/2022\",\r\n    \"replacingAgentEndDate\": \"06/05/2024\",\r\n    \"replacingAgentPay\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/ManageBOB/replaceAgentOnPolicy",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"ManageBOB",
+						"replaceAgentOnPolicy"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,2644 @@
+{
+	"info": {
+		"_postman_id": "54f410d7-a3a8-47ad-9878-759b0770b148",
+		"name": "SavePaymentPreferenceAPI_15",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23876536"
+	},
+	"item": [
+		{
+			"name": "Get Token Copy 2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.access_token)\r",
+							"pm.globals.set(\"accessToken\", jsonData.access_token);\r",
+							"});\r",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "UserName",
+							"value": "SFCCompTestUser",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "SFCCompTestUsr1!",
+							"type": "text"
+						},
+						{
+							"key": "ClientId",
+							"value": "SFCCompTestClient",
+							"type": "text"
+						},
+						{
+							"key": "ClientSecret",
+							"value": "SFCCompTestClt1!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sircontestgateway.sircon.com/Vertafore.OAuth2.Authorization/GenerateOAuthToken",
+					"protocol": "https",
+					"host": [
+						"sircontestgateway",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.OAuth2.Authorization",
+						"GenerateOAuthToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no values and mandatory validations_",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"frequency is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentMethod is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"preferenceFromDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"applicableFor is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"contractCode is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"paymentMethod\": \"\",\r\n    \"frequency\": \"\",\r\n    \"statementDeliveryMethod\": \"\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "datatype validations_ Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeSSNorTaxId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeExternalSystemId\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for preferenceFromDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for preferenceToDate\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for applicableFor\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for paymentMethod\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for frequency\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for statementDeliveryMethod\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for accountNumber\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for routingNumber\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for accountType\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for accountHolderName\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for isActive\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for contractCode\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for carrierShortName\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for percentage\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for minimumPayment\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Invalid datatype for payeeExternalSystemType\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"payeeType\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"payeeSSNorTaxId\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"payeeExternalSystemType\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbhqwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"payeeExternalSystemId\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"preferenceFromDate\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"preferenceToDate\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"applicableFor\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"paymentMethod\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"frequency\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"statementDeliveryMethod\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"bankName\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"accountNumber\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"routingNumber\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"accountType\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"accountHolderName\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"isActive\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"percentage\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"contractCode\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"carrierShortName\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\",\r\n    \"minimumPayment\": \"qwertyuiopasdfghjklzxcvbnm1111234567890!@#$%^&*()dfghjhgfdfghjertyuidvbnmertyuidcvbnfgbh\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mandatory and non mandatory validations_ Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"frequency is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"paymentMethod is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"preferenceFromDate is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"carrierShortName is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeCode is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"isActive is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"statementDeliveryMethod is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"applicableFor is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"contractCode is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeSSNorTaxId is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeExternalSystemId is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"routingNumber is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"indivi\",\r\n    \"payeeType\": \"affiliate\",\r\n    \"payeeSSNorTaxId\": \"22-569-3256\",\r\n    \"payeeExternalSystemType\": \"agentid\",\r\n    \"payeeExternalSystemId\": \"00008526\",\r\n    \"preferenceFromDate\": \"\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"\",\r\n    \"paymentMethod\": \"\",\r\n    \"frequency\": \"\",\r\n    \"statementDeliveryMethod\": \"ecle\",\r\n    \"bankName\": \"3456\",\r\n    \"accountNumber\": \"3456\",\r\n    \"routingNumber\": \"345\",\r\n    \"accountType\": \"che\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"y\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"\",\r\n    \"carrierShortName\": \"bggj\",\r\n    \"minimumPayment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check without minimum payment_200_ Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"Pc-individual351241\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"Weekly\",\r\n    \"statementDeliveryMethod\": \"\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check with minimum payment_200_ Copy 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"Pc-individual351241\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"Weekly\",\r\n    \"statementDeliveryMethod\": \"\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"103\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no payee criteria_ Copy 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Either payeeCode or (payeeType and payeeSSNorTaxId) or (payeeExternalSystemType and PayeeExternalSystemId) is mandatory\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"Weekly\",\r\n    \"statementDeliveryMethod\": \"\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all three different payee criteria_ Copy 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No Payee found with given payeeCode OR (payeeType and payeeSSNorTaxId) OR (payeeExternalSystemType and payeeExternalSystemId)\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"individual\",\r\n    \"payeeSSNorTaxId\": \"252-54-1585\",\r\n    \"payeeExternalSystemType\": \"entityidno\",\r\n    \"payeeExternalSystemId\": \"0000006254\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"Weekly\",\r\n    \"statementDeliveryMethod\": \"\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "same payee criteria_ Copy 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"individual\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"entityidno\",\r\n    \"payeeExternalSystemId\": \"0000006254\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"Weekly\",\r\n    \"statementDeliveryMethod\": \"\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "diff payeeType and SSNorTaxiD_ Copy 7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Provided payeeSSNorTaxId is not matching with given payeeType\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"firm\",\r\n    \"payeeSSNorTaxId\": \"252-54-1585\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"Weekly\",\r\n    \"statementDeliveryMethod\": \"\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "same payeeType and SSNorTaxiD_ Copy 8",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"individual\",\r\n    \"payeeSSNorTaxId\": \"252-54-1585\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"Weekly\",\r\n    \"statementDeliveryMethod\": \"\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"all\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "diff ESID and diff ESIDType_ Copy 9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"payeeExternalSystemId is invalid\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"AGENCYID\",\r\n    \"payeeExternalSystemId\": \"0000006254\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"Weekly\",\r\n    \"statementDeliveryMethod\": \"\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827521\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ToDate < startDate_ Copy 10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"preferenceTodate should not be less than preferenceFromDate\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"09-04-2024\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"Weekly\",\r\n    \"statementDeliveryMethod\": \"\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Applicable for allowed values_ Copy 11",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"Agent Balance\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"weekly\",\r\n    \"statementDeliveryMethod\": \"\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "frequency for allowed values_ Copy 12",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "statementdeliverymethodfor allowed values_ Copy 13",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymentMethod is direct deposit EFT_ Copy 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"bankName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"routingNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountType is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountHolderName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"percentage is mandatory\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"Direct Deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n    \"bankName\": \"\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bankname _ Copy 15",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bankName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"routingNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountType is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountHolderName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"percentage is mandatory\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"Direct Deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n    \"bankName\": \"vsfc\",\r\n    \"accountNumber\": \"\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "account number invalid _ Copy 16",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bankName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountNumber is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"routingNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountType is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountHolderName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"percentage is mandatory\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"Direct Deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n    \"bankName\": \"vsfc\",\r\n    \"accountNumber\": \"@#\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "account number more than 17_ Copy 17",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bankName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountNumber is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"routingNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountType is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountHolderName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"percentage is mandatory\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"Direct Deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n    \"bankName\": \"vsfc\",\r\n    \"accountNumber\": \"123456789123456789639\",\r\n    \"routingNumber\": \"\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "routing number more than or less than 9 digits_ Copy 18",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bankName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"accountNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"routingNumber is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountType is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountHolderName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"percentage is mandatory\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"Direct Deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n    \"bankName\": \"vsfc\",\r\n    \"accountNumber\": \"125689745\",\r\n    \"routingNumber\": \"1234568\",\r\n    \"accountType\": \"\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accountype allowed values_ Copy 19",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bankName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"accountNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"routingNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"accountType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"accountHolderName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"percentage is mandatory\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"Direct Deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n   \"bankName\": \"vsfc\",\r\n    \"accountNumber\": \"125689745\",\r\n    \"routingNumber\": \"123456890\",\r\n    \"accountType\": \"checking\",\r\n    \"accountHolderName\": \"\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accountholdername_ Copy 20",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"bankName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"accountNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"routingNumber is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"accountType is invalid\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"accountHolderName is mandatory\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"percentage is mandatory\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"Direct Deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n   \"bankName\": \"vsfc\",\r\n    \"accountNumber\": \"125689745\",\r\n    \"routingNumber\": \"123456890\",\r\n    \"accountType\": \"checking\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"\",\r\n    \"percentage\": \"\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "isActive _ Copy 21",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"Direct Deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n   \"bankName\": \"vsfc\",\r\n    \"accountNumber\": \"125689745\",\r\n    \"routingNumber\": \"123456890\",\r\n    \"accountType\": \"checking\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"1\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "percentage 0 or less _ Copy 22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Percentage should be greater than 0 and less than or eqaual to 100\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"Direct Deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n   \"bankName\": \"vsfc\",\r\n    \"accountNumber\": \"125689745\",\r\n    \"routingNumber\": \"123456890\",\r\n    \"accountType\": \"checking\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"0\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contract code not exist in system_ Copy 23",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"contractCode is invalid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"Direct Deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n   \"bankName\": \"vsfc\",\r\n    \"accountNumber\": \"125689745\",\r\n    \"routingNumber\": \"123456890\",\r\n    \"accountType\": \"checking\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"10\",\r\n    \"contractCode\": \"C-93827500\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "carrier (Contract level)_ Copy 24",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"contractCode is mandatory\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351240\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"Direct Deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n   \"bankName\": \"vsfc\",\r\n    \"accountNumber\": \"125689745\",\r\n    \"routingNumber\": \"123456890\",\r\n    \"accountType\": \"checking\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"10\",\r\n    \"contractCode\": \"\",\r\n    \"carrierShortName\": \"MPC\",\r\n    \"minimumPayment\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EFT more than 100 for another record_ Copy 25",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Sum of percentages should not be greater than 100\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"direct deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n    \"bankName\": \"vysya\",\r\n    \"accountNumber\": \"125689745\",\r\n    \"routingNumber\": \"123456890\",\r\n    \"accountType\": \"checking\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"yes\",\r\n    \"percentage\": \"100\",\r\n    \"contractCode\": \"C-93831614\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "multiple agency taxId_ Copy 26",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Multiple records found with provided payeeType and payeeSSNorTaxId, please provide additional identifiers like payeeCode or (payeeExternalSystemType and payeeExternalSystemId)\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"\",\r\n    \"payeeType\": \"firm\",\r\n    \"payeeSSNorTaxId\": \"99-9888815\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/05/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"Direct Deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n    \"bankName\": \"vsfc\",\r\n    \"accountNumber\": \"125689745\",\r\n    \"routingNumber\": \"123456890\",\r\n    \"accountType\": \"checking\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"10\",\r\n    \"contractCode\": \"C-93827520\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "adding another eft with diff duration_ Copy 26",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual351241\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/08/2024\",\r\n    \"preferenceToDate\": \"09-30-2024\",\r\n    \"applicableFor\": \"all\",\r\n    \"paymentMethod\": \"direct deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"electronic\",\r\n    \"bankName\": \"saraswat\",\r\n    \"accountNumber\": \"125689746\",\r\n    \"routingNumber\": \"123456891\",\r\n    \"accountType\": \"savings\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"10\",\r\n    \"contractCode\": \"C-93831614\",\r\n    \"carrierShortName\": \"MPC\",\r\n    \"minimumPayment\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "two Payment preference record with same Payment method in same duration(MPP disable)_ Copy 27",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/*  multiple payment preference is in disable mode\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Payment Preference is already exists in same duration\");\r",
+							"});*/"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm627982\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/10/2024\",\r\n    \"preferenceToDate\": \"09-30-2024\",\r\n    \"applicableFor\": \"agent balance\",\r\n    \"paymentMethod\": \"direct deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"paper\",\r\n    \"bankName\": \"karur\",\r\n    \"accountNumber\": \"1432567543\",\r\n    \"routingNumber\": \"395864368\",\r\n    \"accountType\": \"savings\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"0.2\",\r\n    \"contractCode\": \"C-93820140\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Bank detail for already available Payment preference record(MPP Disable)_ Copy 28",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm627617\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/10/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"agent balance\",\r\n    \"paymentMethod\": \"direct deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"paper\",\r\n    \"bankName\": \"karur\",\r\n    \"accountNumber\": \"1432567542\",\r\n    \"routingNumber\": \"395864367\",\r\n    \"accountType\": \"savings\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"100\",\r\n    \"contractCode\": \"C-93820517\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "different bank name(MPP Disable)_ Copy 29",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/*  multiple payment preference is in disable mode\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Payment Preference is already exists in same duration\");\r",
+							"});*/"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm627617\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/10/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"agent balance\",\r\n    \"paymentMethod\": \"direct deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"paper\",\r\n    \"bankName\": \"saraswat\",\r\n    \"accountNumber\": \"1432567542\",\r\n    \"routingNumber\": \"395864367\",\r\n    \"accountType\": \"savings\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"0.2\",\r\n    \"contractCode\": \"C-93820517\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contract code is from diff agent which is not there in DD_ Copy 30",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"contractCode is invalid\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-firm627617\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/10/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"agent balance\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"paper\",\r\n    \"bankName\": \"saraswat\",\r\n    \"accountNumber\": \"1432567542\",\r\n    \"routingNumber\": \"395864367\",\r\n    \"accountType\": \"savings\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"0.2\",\r\n    \"contractCode\": \"C-10000015\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "carrier as all_ Copy 31",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/* at carrier level\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});*/\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual352982\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/10/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"agent balance\",\r\n    \"paymentMethod\": \"direct deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"paper\",\r\n    \"bankName\": \"saraswat\",\r\n    \"accountNumber\": \"1432567542\",\r\n    \"routingNumber\": \"395864367\",\r\n    \"accountType\": \"savings\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"0.2\",\r\n    \"contractCode\": \"C-93820517\",\r\n    \"carrierShortName\": \"all\",\r\n    \"minimumPayment\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contract as all_ Copy 32",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-individual888888\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"09/10/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"agent balance\",\r\n    \"paymentMethod\": \"direct deposit (EFT)\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"paper\",\r\n    \"bankName\": \"saraswat\",\r\n    \"accountNumber\": \"1432567542\",\r\n    \"routingNumber\": \"395864367\",\r\n    \"accountType\": \"savings\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"0.2\",\r\n    \"contractCode\": \"all\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "testing purpose",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "producerUserName",
+						"value": "indvidual",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payeeCode\": \"PC-AF00714\",\r\n    \"payeeType\": \"\",\r\n    \"payeeSSNorTaxId\": \"\",\r\n    \"payeeExternalSystemType\": \"\",\r\n    \"payeeExternalSystemId\": \"\",\r\n    \"preferenceFromDate\": \"10/15/2024\",\r\n    \"preferenceToDate\": \"\",\r\n    \"applicableFor\": \"agent balance\",\r\n    \"paymentMethod\": \"check\",\r\n    \"frequency\": \"monthly\",\r\n    \"statementDeliveryMethod\": \"paper\",\r\n    \"bankName\": \"saraswatiiiii565\",\r\n    \"accountNumber\": \"259874639\",\r\n    \"routingNumber\": \"541226887\",\r\n    \"accountType\": \"savings\",\r\n    \"accountHolderName\": \"kavita\",\r\n    \"isActive\": \"no\",\r\n    \"percentage\": \"23\",\r\n    \"contractCode\": \"all\",\r\n    \"carrierShortName\": \"\",\r\n    \"minimumPayment\": \"33\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sircontestsfcqacomp.sircon.com/Vertafore.SFC.Customer.External/api/Payee/savePaymentPreference",
+					"protocol": "https",
+					"host": [
+						"sircontestsfcqacomp",
+						"sircon",
+						"com"
+					],
+					"path": [
+						"Vertafore.SFC.Customer.External",
+						"api",
+						"Payee",
+						"savePaymentPreference"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
